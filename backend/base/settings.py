@@ -14,6 +14,7 @@ from datetime import timedelta
 from pathlib import Path
 import os
 from environ import Env
+from celery.schedules import crontab
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,6 +41,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'Covid',
     'Accounts',
     'rest_framework',
     'django.contrib.admin',
@@ -51,7 +53,10 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_auth',
     'phonenumber_field',
+    'django_celery_results',
+    'django_celery_beat',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -161,6 +166,24 @@ REST_FRAMEWORK = {
     ]
 
 }
+
+
+
+CELERY_BROKER_URL = env("CELERY_BROKER_URL")
+CELERY_RESULT_BACKEND = env("CELERY_RESULT_BACKEND") 
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TAST_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_ENABLE_UTC = True
+
+# execute task at 0:00 
+CELERY_BEAT_SCHEDULE = {
+    'scheduled_task' : {
+        'task': 'Covid.tasks.updateDatabase',
+        'schedule' : crontab(hour=0, minute=0),
+    },
+}
+
 
 
 SIMPLE_JWT = {

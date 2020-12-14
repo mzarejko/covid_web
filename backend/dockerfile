@@ -13,12 +13,16 @@ COPY requirements.txt .
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
+RUN apt-get -q update && apt-get -qy install netcat
+
+# wait tool for scheduling containers
+COPY wait-for.sh wait-for.sh
+RUN chmod +x wait-for.sh
+
+
 COPY . /app/backend/
 
-RUN useradd user
-USER user
+
 
 EXPOSE 8000
 
-
-CMD python3 manage.py runserver 0.0.0.0:8000

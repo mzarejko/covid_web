@@ -1,6 +1,5 @@
 Django>=3.0,<4.0
 numpy 
-matplotlib
 tensorflow==2.2
 djangorestframework
 markdown
@@ -12,3 +11,8 @@ django-cors-headers == 3.5.0
 django-rest-auth
 djangorestframework-simplejwt
 django-phonenumber-field[phonenumbers]
+pandas
+celery
+django_celery_results
+django_celery_beat
+pillow
