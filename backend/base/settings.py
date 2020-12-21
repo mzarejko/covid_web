@@ -41,6 +41,8 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'Comments',
+    'Members',
     'Covid',
     'Accounts',
     'rest_framework',
@@ -170,7 +172,7 @@ REST_FRAMEWORK = {
 
 
 CELERY_BROKER_URL = env("CELERY_BROKER_URL")
-CELERY_RESULT_BACKEND = env("CELERY_RESULT_BACKEND") 
+CELERY_RESULT_BACKEND =env("CELERY_RESULT_BACKEND") 
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TAST_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
@@ -183,6 +185,14 @@ CELERY_BEAT_SCHEDULE = {
         'schedule' : crontab(hour=0, minute=0),
     },
 }
+
+
+# stuff for registrtation
+EMAIL_USE_TLS=True
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_PORT=587
+EMAIL_HOST_USER = os.environ.get("GMAIL")
+EMAIL_HOST_PASSWORD = os.environ.get("PASS_GMAIL")
 
 
 
