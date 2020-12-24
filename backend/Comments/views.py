@@ -1,6 +1,7 @@
 from .models import Opinion
 from .serializers import OpinionSerializer 
 from rest_framework.generics import ListAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
@@ -18,7 +19,7 @@ class NeedyOpinion(ListCreateAPIView):
 
     def get_queryset(self):
         needy = Needy.objects.get(user=self.request.user)
-        return Opinion.objects.filter(user=needy)
+        return Opinion.objects.filter(user = needy)
 
 class VolunteerOpinion(ListAPIView):
     permission_classes = [IsAuthenticated, IsVolunteerActive]
@@ -37,4 +38,5 @@ class UpdateDestroyOpinion(RetrieveUpdateDestroyAPIView):
         needy = Needy.objects.get(user=self.request.user)
         return Opinion.objects.filter(user=needy)
 
-    
+
+

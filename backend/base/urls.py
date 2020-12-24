@@ -22,13 +22,11 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('Accounts.urls')),
+    path('announcements/', include('Announcements.urls')),
     path('members/', include('Members.urls')),
     path('covid/', include('Covid.urls')),
     path('auth/', include('rest_framework.urls')),
     path('comments/', include('Comments.urls'))
 ]
 
-
-# for displaying images at endpoint for DEBUG mode
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
