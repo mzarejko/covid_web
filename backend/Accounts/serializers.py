@@ -61,4 +61,3 @@ class LoginSerializer(serializers.ModelSerializer):
         return {'username': user.username, 'tokens': user.tokens}
 
 
-

@@ -5,7 +5,7 @@ from .serializers import UserSerializer, RegisterSerializer, LoginSerializer
 from django.http import Http404 
 from rest_framework import status 
 from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
-from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 from .tasks import send_emali 
 from django.contrib.sites.shortcuts import get_current_site 
 from django.urls import reverse 
@@ -75,4 +75,13 @@ class VerifyEmail(APIView):
 
 
 
+class LogoutAPI(APIView):
+    permission_classes = [IsAuthenticated]
 
+    def post(self, request):
+        try:
+            refreshToken = request.data["refresh"]
+            token = RefreshToken(refreshToken).blacklist()
+        except TokenError:
+            return Response({'error': 'Token is invalid or expired'})
+        return Response({'Successful logout'}, status=status.HTTP_204_NO_CONTENT)

@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
-from Accounts.permissions import IsUserOwner
+from Members.permissions import IsNeedyOwner  
 from Members.permissions import IsNeedyActive, IsVolunteerActive 
 from Members.models import Volunteer, Needy
 from django.http import Http404
@@ -15,11 +15,12 @@ class NeedyOpinion(ListCreateAPIView):
     serializer_class = OpinionSerializer
     
     def perform_create(self, serializer):
-        return serializer.save(user=self.request.user)
+        needy = Needy.objects.get(user=self.request.user)
+        return serializer.save(needy=needy)
 
     def get_queryset(self):
         needy = Needy.objects.get(user=self.request.user)
-        return Opinion.objects.filter(user = needy)
+        return Opinion.objects.filter(needy = needy)
 
 class VolunteerOpinion(ListAPIView):
     permission_classes = [IsAuthenticated, IsVolunteerActive]
@@ -31,12 +32,13 @@ class VolunteerOpinion(ListAPIView):
 
 
 class UpdateDestroyOpinion(RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsAuthenticated, IsUserOwner, IsNeedyActive]
+    permission_classes = [IsAuthenticated, IsNeedyOwner, IsNeedyActive]
     serializer_class = OpinionSerializer
+    lookup_field="pk"
 
     def get_queryset(self):
         needy = Needy.objects.get(user=self.request.user)
-        return Opinion.objects.filter(user=needy)
+        return Opinion.objects.filter(needy=needy)
 
 
 

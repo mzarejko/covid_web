@@ -9,5 +9,5 @@ class AnnouncementSerializer(serializers.ModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model= Product
-        fields = ['name', 'descritpion', 'priority']
+        fields = ['name', 'description', 'priority']
         

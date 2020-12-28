@@ -24,3 +24,9 @@ class IsVolunteerInactive(permissions.BasePermission):
     def has_permission(self, request, view):
         volunteer =  Volunteer.objects.get(user=request.user)
         return not volunteer.is_active
+
+class IsNeedyOwner(permissions.BasePermission):
+
+    def has_object_permission(self, request, view, obj):
+        needy = Needy.objects.get(user=request.user)
+        return obj.needy == needy

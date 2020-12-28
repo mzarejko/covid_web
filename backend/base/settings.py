@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'Members',
     'Covid',
     'Accounts',
+    'rest_framework_simplejwt.token_blacklist',
     'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
