@@ -6,7 +6,7 @@ urlpatterns = [
     path('deactivate-needy/', views.DeactivateNeedy.as_view(), name='needy-dec'),
     path('activate-vol/', views.ActivateVolunteer.as_view(), name='volunteer-act'),
     path('deactivate-vol/', views.DeactivateVolunteer.as_view(), name='volunteer-dec'),
-    path('vol-update/', views.UpdateVolunteer.as_view(), name='volunteer-update'),
+    path('vol-update/', views.UpdateScore.as_view(), name='score-update'),
 ]
 
 

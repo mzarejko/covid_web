@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from .serializers import UserSerializer, RegisterSerializer, LoginSerializer
 from django.http import Http404 
 from rest_framework import status 
-from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 from .tasks import send_emali 
 from django.contrib.sites.shortcuts import get_current_site 
@@ -16,7 +16,7 @@ from Members.models import Volunteer, Needy
 class LoginAPI(APIView):
     permission_classes = [AllowAny]
     
-    def post(self, request, format='json'):
+    def post(self, request):
         serializer = LoginSerializer(data=request.data)
         if serializer.is_valid():
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -24,7 +24,7 @@ class LoginAPI(APIView):
 class RegisterAPI(APIView):
     permission_classes = [AllowAny]
 
-    def post(self, request, format='json'):
+    def post(self, request):
         serializer = RegisterSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -39,7 +39,7 @@ class RegisterAPI(APIView):
             absurl='http://'+current_site+relativeLink+"?token="+str(token)
 
             # info for user
-            email_body = f'Hi {user.username} take this link to activate account:  \n {absurl}'
+            email_body = f'Hi {user.username} click this link to activate account:  \n {absurl}'
             mail = {'email_body': email_body,  'to_email':user.email, 'email_subject': 'Verify your email'}
 
             # send email to verify account
@@ -50,7 +50,7 @@ class RegisterAPI(APIView):
 class VerifyEmail(APIView):
     permission_classes = [AllowAny]
 
-    def get(self, request, format='json'):
+    def get(self, request):
         token = request.GET.get('token')
         try:
             # authentication

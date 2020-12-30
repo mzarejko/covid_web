@@ -14,8 +14,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         model = User
         fields = ['username', 'email',  'country', 'town', 'telephone', 'password']
         extra_kwargs = {
-            'password': {'write_only' : True},
-            'password2': {'write_only': True}
+            'password': {'write_only' : True}
         }
     
     # extended function for create user

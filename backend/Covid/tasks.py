@@ -3,8 +3,6 @@ from .models import Covid_file
 from . import Data_settings
 from celery  import shared_task
 
-
-
 @shared_task
 def updateDatabase():
     Covid_file.objects.all().delete()

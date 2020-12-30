@@ -9,7 +9,7 @@ from rest_framework import status
 class ActivateVolunteer(APIView):
     permission_classes=[IsAuthenticated, IsNeedyInactive]
     
-    def put(self, request, format='json'):
+    def put(self, request):
         volunteer = Volunteer.objects.get(user=request.user)
         if not volunteer.is_active:
             volunteer.is_active = True
@@ -19,17 +19,17 @@ class ActivateVolunteer(APIView):
 class DeactivateVolunteer(APIView):
     permission_classes=[IsAuthenticated, IsNeedyInactive]
     
-    def put(self, request, format='json'):
+    def put(self, request):
         volunteer = Volunteer.objects.get(user=request.user)
         if volunteer.is_active:
             volunteer.is_active = False
             volunteer.save()
             return Response({'volunteer': 'Successfully deactivate'}, status=status.HTTP_200_OK)
 
-class UpdateVolunteer(APIView):
+class UpdateScore(APIView):
     permission_classes = [IsAuthenticated, IsVolunteerActive, IsNeedyInactive]
 
-    def put(self, request, format='json'):
+    def put(self, request):
         volunteer = Volunteer.objects.get(user=request.user)
         serializer = VolunteerSerializer(volunteer, data= request.data)
         if serializer.is_valid():
@@ -40,7 +40,7 @@ class UpdateVolunteer(APIView):
 class ActivateNeedy(APIView):
     permission_classes=[IsAuthenticated, IsVolunteerInactive]
 
-    def put(self, request, format='json'):
+    def put(self, request):
         needy = Needy.objects.get(user=request.user)
         if not needy.is_active:
             needy.is_active = True
@@ -50,7 +50,7 @@ class ActivateNeedy(APIView):
 class DeactivateNeedy(APIView):
     permission_classes=[IsAuthenticated, IsVolunteerInactive]
     
-    def put(self, request, format='json'):
+    def put(self, request):
         needy = Needy.objects.get(user=request.user)
         if needy.is_active:
             needy.is_active = False

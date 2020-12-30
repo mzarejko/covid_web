@@ -19,11 +19,6 @@ from celery.schedules import crontab
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
-
-
 env = Env()
 env.read_env(env_file='.env')
 
@@ -46,6 +41,7 @@ INSTALLED_APPS = [
     'Members',
     'Covid',
     'Accounts',
+    'django_filters',
     'rest_framework_simplejwt.token_blacklist',
     'rest_framework',
     'django.contrib.admin',
@@ -92,10 +88,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'base.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
@@ -106,9 +98,6 @@ DATABASES = {
     }
 }
 
-
-# Password validation
-# https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
 # this is needed for inheritance django AbstractUser
 AUTH_USER_MODEL = 'Accounts.User'
@@ -128,10 +117,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/3.1/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -144,7 +129,6 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-
 STATIC_URL = '/static/'
 MEDIA_URL = '/images/'
 
@@ -165,8 +149,10 @@ REST_FRAMEWORK = {
     # authentication by JWT tokens
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ]
-
+    ],
+    # filtering
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend']
 }
 
 
