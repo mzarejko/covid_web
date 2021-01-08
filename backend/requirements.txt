@@ -7,7 +7,7 @@ django-filter
 psycopg2
 gunicorn
 python-environ
-django-cors-headers == 3.5.0
+django-cors-headers
 django-rest-auth
 djangorestframework-simplejwt
 django-phonenumber-field[phonenumbers]

@@ -13,7 +13,8 @@ COPY requirements.txt .
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-RUN apt-get -q update && apt-get -qy install netcat
+RUN apt-get update && apt-get install net-tools 
+RUN apt-get install -y netcat
 
 # wait tool for scheduling containers
 COPY wait-for.sh wait-for.sh

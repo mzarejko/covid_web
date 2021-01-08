@@ -21,6 +21,7 @@ class LoginAPI(APIView):
         if serializer.is_valid():
             return Response(serializer.data, status=status.HTTP_200_OK)
 
+
 class RegisterAPI(APIView):
     permission_classes = [AllowAny]
 
@@ -32,7 +33,7 @@ class RegisterAPI(APIView):
             # obtain token 
             user = User.objects.get(username=serializer.data['username'])
             token = RefreshToken.for_user(user).access_token
-           
+
             # obtain site for user
             current_site = get_current_site(request).domain
             relativeLink=reverse('verify')
@@ -40,7 +41,7 @@ class RegisterAPI(APIView):
 
             # info for user
             email_body = f'Hi {user.username} click this link to activate account:  \n {absurl}'
-            mail = {'email_body': email_body,  'to_email':user.email, 'email_subject': 'Verify your email'}
+            mail = {'email_body': email_body,  'to_email': user.email, 'email_subject': 'Verify your email'}
 
             # send email to verify account
             send_emali.delay(mail)
@@ -52,9 +53,10 @@ class VerifyEmail(APIView):
 
     def get(self, request):
         token = request.GET.get('token')
+
         try:
             # authentication
-            payload = jwt.decode(token, settings.SECRET_KEY)
+            payload = jwt.decode(token, settings.SECRET_KEY, algorithms='HS256')
             user = User.objects.get(id=payload['user_id'])
             needy = Needy(user=user)
             volunteer = Volunteer(user=user)
@@ -72,16 +74,13 @@ class VerifyEmail(APIView):
         except jwt.exceptions.DecodeError as error:
             return Response({'error': 'invalid token'}, status=status.HTTP_400_BAD_REQUEST)
 
-
-
-
 class LogoutAPI(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
         try:
             refreshToken = request.data["refresh"]
-            token = RefreshToken(refreshToken).blacklist()
+            RefreshToken(refreshToken).blacklist()
         except TokenError:
             return Response({'error': 'Token is invalid or expired'})
         return Response({'Successful logout'}, status=status.HTTP_204_NO_CONTENT)

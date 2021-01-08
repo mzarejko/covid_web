@@ -42,9 +42,9 @@ INSTALLED_APPS = [
     'Covid',
     'Accounts',
     'django_filters',
-    'rest_framework_simplejwt.token_blacklist',
     'rest_framework',
     'django.contrib.admin',
+    'rest_framework_simplejwt.token_blacklist',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -66,6 +66,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'base.urls'
@@ -155,6 +157,8 @@ REST_FRAMEWORK = {
         'django_filters.rest_framework.DjangoFilterBackend']
 }
 
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 CELERY_BROKER_URL = env("CELERY_BROKER_URL")
@@ -195,7 +199,7 @@ SIMPLE_JWT = {
     'AUDIENCE': None,
     'ISSUER': None,
 
-    'AUTH_HEADER_TYPES': ('Bearer', 'JWT'),
+    'AUTH_HEADER_TYPES': ('Bearer'),
     'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
     'USER_ID_FIELD': 'id',
     'USER_ID_CLAIM': 'user_id',

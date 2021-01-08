@@ -12,14 +12,21 @@ class UserSerializer(serializers.ModelSerializer):
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username', 'email',  'country', 'town', 'telephone', 'password']
+        fields = ['username', 'email',  'country', 'town', 'telephone', 'password', 'birth', 'firstname', 'lastname', 'description']
         extra_kwargs = {
             'password': {'write_only' : True}
         }
     
     # extended function for create user
     def create(self, validated_data):
-        
+        # check if user exist and if exist but is not verfied then delete
+        unverfied_user = User.objects.first(username = validated_data['username'])
+        unverfied_email = User.objects.first(email = validated_data['email'])
+        if unverfied_user and not unverfied_user.is_verified:
+            unverfied_user.delete()
+        if unverfied_email and not unverfied_email.is_verified:
+            unverfied_email.delete()
+
         password = validated_data['password']
 
         user = User(
@@ -27,7 +34,11 @@ class RegisterSerializer(serializers.ModelSerializer):
             email = validated_data['email'],
             country = validated_data['country'],
             town = validated_data['town'],
-            telephone = validated_data['telephone']
+            telephone = validated_data['telephone'],
+            birth = validated_data['birth'],
+            firstname= validated_data['firstname'],
+            lastname= validated_data['lastname'],
+            description= validated_data['description']
         )
         user.set_password(password)
         user.save()
