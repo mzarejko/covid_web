@@ -11,6 +11,7 @@ Main goal of the program is to create a website for easy communication between p
   - [x]  downloading covid data form github each day
   - [ ]  diplaying chart and data of covid in frontend
   - [x]  possibility to choose a volunteer and a sick person 
-  - [ ]  frontend
-  - [ ]  backend
+  - [x]  exceptions management
+  - [ ]  frontend (all)
+  - [ ]  backend (all)
   
