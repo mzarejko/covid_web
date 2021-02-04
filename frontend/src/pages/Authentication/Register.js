@@ -29,30 +29,27 @@ class Register extends Component {
     }
     
 
-    value2null = (value) => {
-        if(value === ''){
-            return null
-        }
-        return value
-    }
 
     handleSubmit = () => {
         axios.post('http://0.0.0.0:8000/accounts/register/', {
-            username: this.value2null(this.state.username),
-            email: this.value2null(this.state.mail),
-            country: this.value2null(this.state.country),
-            town: this.value2null(this.state.town),
-            telephone: this.value2null(this.state.telephone),
-            birth: this.value2null(this.state.birth),
-            description: this.value2null(this.state.description),
-            password: this.value2null(this.state.password),
-            firstname: this.value2null(this.state.firstname),
-            lastname: this.value2null(this.state.lastname) 
-        }).then((response) =>{
-            this.setState({error: 'Mail aktywujący twoje konto został wysłany na poczte!'})
-        }).catch((err) => {
-            console.log(err)
-            this.setState({error: 'Nie uzupełniono wymaganych pól lub są nie prawidłowe!'})
+            "username": this.state.username,
+            "email": this.state.email,
+            "country": this.state.country,
+            "town": this.state.town,
+            "telephone": this.state.telephone,
+            "birth": this.state.birth,
+            "description": this.state.description,
+            "password": this.state.password,
+            "firstname": this.state.firstname,
+            "lastname": this.state.lastname 
+        }).then((resp) => {
+            this.setState({
+                error: resp.request.response 
+            });
+        }).catch((err) =>{
+            this.setState({
+                error: err.request.response 
+            });
         });
     }
    

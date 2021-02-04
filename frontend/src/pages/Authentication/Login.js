@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import {axiosInstance} from "../../components/Axios/axiosApi";
 import './auth_style.css';
 import { Link } from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
+import axios from 'axios';
 
 class Login extends Component {
     
@@ -14,6 +15,7 @@ class Login extends Component {
         };
     }
 
+
     changeValue = (event) => {
         this.setState({
             [event.target.name]: event.target.value
@@ -22,20 +24,20 @@ class Login extends Component {
     
     handleSubmit = (event) => {
         event.preventDefault();
-        try{
-            const response = axiosInstance.post('/accounts/login/', {
-                username: this.state.username,
-                password: this.state.password
-            });
+        axios.post('http://0.0.0.0:8000/accounts/login/', {
+            "username": this.state.username,
+            "password": this.state.password
+        }).then((response) => {
             localStorage.setItem('access_token', response.data.access);
             localStorage.setItem('refresh_token', response.data.refresh);
-        }catch (error){
-            this.setState({
-                error: 'złe hasło lub nazwa urzytkownika' 
-            });
-        }
+            this.props.history.push('/home/'); 
+        }).catch((error) => {
+            this.setState({error: error.request.response})
+            console.log(error)
+        });
     }
     
+
     render(){    
         return (
             <div className="box">
@@ -65,10 +67,11 @@ class Login extends Component {
                     </div>
                     <div className="rows">
                         <div className='items'>
+                        
                             <button onClick={this.handleSubmit}>login</button>
                         </div>
                         <div className='items'>
-                            <Link to='/register'><button>Signup</button></Link>
+                            <Link to='/register'><button>Sign up</button></Link>
                         </div>
                     </div>
                 </div>

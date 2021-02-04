@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {Link} from 'react-router-dom';
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
-import * as GoIcons from "react-icons/go";
 import { NavbarItems } from './NavbarItems';
 import './Navbar.css'
 import {IconContext} from 'react-icons';
@@ -33,7 +32,7 @@ class Navbar extends Component {
                     <Link to="#" className='menu-bars left'>
                         <FaIcons.FaBars onClick={this.handleClick} />
                     </Link>
-                    <Button buttonStyle='outline'>logout</Button>
+                    <Button buttonStyle='outline' onClick={this.props.logout} >logout</Button>
                 </div>
                 <nav className={this.state.active_bar ? 'nav-menu' : 'nav-active'}>
                     <ul className='nav-menu-items' onClick={this.handleClick}>

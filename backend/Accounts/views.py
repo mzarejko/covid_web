@@ -3,8 +3,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import UserSerializer, RegisterSerializer, LoginSerializer
 from django.http import Http404 
-from rest_framework import status 
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework import status 
 from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 from .tasks import send_emali 
 from django.contrib.sites.shortcuts import get_current_site 
@@ -16,20 +16,42 @@ from Members.models import Volunteer, Needy
 class LoginAPI(APIView):
     permission_classes = [AllowAny]
     
+    def fix_dic(self, data):
+        fixed = {}
+        for key in data:
+            if data[key] == '':
+                fixed[key] = None
+            else:
+                fixed[key] = data[key]
+        return fixed
+
     def post(self, request):
-        serializer = LoginSerializer(data=request.data)
-        if serializer.is_valid():
+        data = self.fix_dic(request.data)
+        print(data)
+        serializer = LoginSerializer(data=data)
+        if serializer.is_valid(raise_exception=True):
             return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class RegisterAPI(APIView):
     permission_classes = [AllowAny]
+    
+    # change empty string to None
+    def fix_dic(self, data):
+        fixed = {}
+        for key in data:
+            if data[key] == '':
+                fixed[key] = None
+            else:
+                fixed[key] = data[key]
+        return fixed
 
     def post(self, request):
-        serializer = RegisterSerializer(data=request.data)
-        if serializer.is_valid():
+        data = self.fix_dic(request.data)
+        print(data)
+        serializer = RegisterSerializer(data=data)
+        if serializer.is_valid(raise_exception=True):
             serializer.save()
-            
             # obtain token 
             user = User.objects.get(username=serializer.data['username'])
             token = RefreshToken.for_user(user).access_token
@@ -46,7 +68,7 @@ class RegisterAPI(APIView):
             # send email to verify account
             send_emali.delay(mail)
 
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response({"message":"Check your mail for activation mail"}, status=status.HTTP_201_CREATED)
 
 class VerifyEmail(APIView):
     permission_classes = [AllowAny]
@@ -78,6 +100,7 @@ class LogoutAPI(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
+        print(request.data)
         try:
             refreshToken = request.data["refresh"]
             RefreshToken(refreshToken).blacklist()

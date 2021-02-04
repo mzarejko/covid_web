@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
-from phonenumber_field.modelfields import PhoneNumberField 
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.tokens import OutstandingToken
 
 # this is needed because we extend AbstractBaseUser  
 class CustomAccountManager(BaseUserManager):
@@ -36,14 +36,14 @@ class CustomAccountManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=45, unique=True)
     email = models.EmailField(unique=True)
-    birth = models.DateField(null=True, blank=True)
+    birth = models.DateField(null=True)
     country = models.CharField(max_length=45)
     town = models.CharField(max_length=45)
-    telephone = PhoneNumberField(unique=True, blank=True, null=True)
-    description = models.CharField(max_length=400, null=True, blank=True)
-    image = models.ImageField(blank=True, null=True)
-    firstname = models.CharField(max_length=45, blank=True, null=True)
-    lastname = models.CharField(max_length=45, blank=True, null=True)
+    telephone = models.CharField(unique=True, max_length=9, null=True)
+    description = models.CharField(max_length=400, null=True)
+    image = models.ImageField(null=True)
+    firstname = models.CharField(max_length=45, null=True)
+    lastname = models.CharField(max_length=45, null=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_verified = models.BooleanField(default=False)
@@ -58,8 +58,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     
     def tokens(self):
         token=RefreshToken.for_user(self)
-        return {
-            'refresh': str(token),
-            'access': str(token.access_token)
-        }
-
+        return {"access": str(token.access_token),
+                "refresh": str(token)}
+        

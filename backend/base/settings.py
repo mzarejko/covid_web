@@ -52,7 +52,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_auth',
-    'phonenumber_field',
     'django_celery_results',
     'django_celery_beat',
 ]
@@ -154,7 +153,9 @@ REST_FRAMEWORK = {
     ],
     # filtering
     'DEFAULT_FILTER_BACKENDS': [
-        'django_filters.rest_framework.DjangoFilterBackend']
+        'django_filters.rest_framework.DjangoFilterBackend'],
+    # exceptions
+    'EXCEPTION_HANDLER': ('utils.exc_handler.custome_exception_handler')
 }
 
 CORS_ALLOW_CREDENTIALS = True

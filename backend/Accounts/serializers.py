@@ -2,6 +2,8 @@ from rest_framework import serializers
 from .models import User 
 from django.contrib.auth import get_user_model 
 from django.contrib import auth
+from rest_framework import status 
+from rest_framework.exceptions import ValidationError
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -10,6 +12,16 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class RegisterSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(required=True, allow_null=False)
+    email = serializers.EmailField(required=True, allow_null=False)
+    password = serializers.CharField(required=True, write_only=True,
+                                     style = {'input_type': 'password'})
+    telephone = serializers.CharField(required=True,allow_null=False)
+    birth = serializers.DateField(required=False, allow_null=True)
+    firstname = serializers.CharField(required=False, allow_null=True)
+    lastname = serializers.CharField(required=False, allow_null=True)
+    description = serializers.CharField(required=False, allow_null=True)
+
     class Meta:
         model = User
         fields = ['username', 'email',  'country', 'town', 'telephone', 'password', 'birth', 'firstname', 'lastname', 'description']
@@ -17,57 +29,86 @@ class RegisterSerializer(serializers.ModelSerializer):
             'password': {'write_only' : True}
         }
     
-    # extended function for create user
-    def create(self, validated_data):
-        # check if user exist and if exist but is not verfied then delete
-        unverfied_user = User.objects.first(username = validated_data['username'])
-        unverfied_email = User.objects.first(email = validated_data['email'])
-        if unverfied_user and not unverfied_user.is_verified:
-            unverfied_user.delete()
-        if unverfied_email and not unverfied_email.is_verified:
-            unverfied_email.delete()
 
-        password = validated_data['password']
+    def validate_username(self, value):
+        if User.objects.filter(username=value, is_verified=True).exists():
+            raise ValidationError({"error": "Username already exist"}, 
+                                              code=status.HTTP_409_CONFLICT)
+        
+        return value 
+
+    def validate_email(self, value):
+        if User.objects.filter(email=value, is_verified=True).exists():
+            raise ValidationError({"error": "Email already exist"}, 
+                                              code=status.HTTP_409_CONFLICT)
+        return value
+        
+    def validate_telephone(self, value):
+        if User.objects.filter(telephone=value, is_verified=True).exists():
+            raise ValidationError({"error": "User with that telephone number already exist"}, 
+                                              _code=status.HTTP_409_CONFLICT)
+        
+        if len(value) != 9:
+            raise ValidationError({"error": "telephone field need 9 numbers"},
+                                              code= status.HTTP_406_NOT_ACCEPTABLE)
+        return value 
+        
+
+
+
+    # extended function for create user
+    def create(self, data):
+        password = data['password'] 
 
         user = User(
-            username = validated_data['username'],
-            email = validated_data['email'],
-            country = validated_data['country'],
-            town = validated_data['town'],
-            telephone = validated_data['telephone'],
-            birth = validated_data['birth'],
-            firstname= validated_data['firstname'],
-            lastname= validated_data['lastname'],
-            description= validated_data['description']
+            username=data['username'],
+            email=data['email'],
+            country= data['country'],
+            town=data['town'],
+            telephone=data['telephone'],
+            birth = data['birth'],
+            firstname = data['firstname'],
+            lastname = data['lastname'],
+            description = data['description']
         )
         user.set_password(password)
         user.save()
         return user
 
+
 class LoginSerializer(serializers.ModelSerializer):
-    username=serializers.CharField(max_length=45)
-    password = serializers.CharField(max_length=45, write_only=True)
-    tokens = serializers.CharField(max_length=45, read_only=True)
+    username=serializers.CharField(max_length=45, required=True)
+    password = serializers.CharField(max_length=45, write_only=True, required=True)
+    access = serializers.CharField(max_length=45, read_only=True)
+    refresh = serializers.CharField(max_length=45, read_only=True)
 
     class Meta:
         model=User
-        fields=['username', 'password', 'tokens']
+        fields=['username', 'password', 'access', 'refresh']
+
 
 
     def validate(self, data):
-        super().validate(data)
         username=data.get('username')
         password=data.get('password')
 
         user = auth.authenticate(username=username, password=password)
+
+        if user is None:
+            raise ValidationError({"error": 'wrong password or username'},
+                                                code=status.HTTP_400_BAD_REQUEST)
         
-        if not user:
-            raise Exception('wrong password or username')
         if not user.is_active:
-            raise Exception('Account not active')
+            raise ValidationError({"error": 'Account not active'},
+                                              code = status.HTTP_406_NOT_ACCEPTABLE)
         if not user.is_verified:
-            raise Exception('Account not verfied, first active your profile')
-        
-        return {'username': user.username, 'tokens': user.tokens}
+            raise ValidationError({"error": 'Account not verfied, first active your profile'},
+                                              code = status.HTTP_400_BAD_REQUEST)
+        tokens = user.tokens()
+        return {"username": user,
+                "access": tokens['access'],
+                "refresh": tokens['refresh']} 
+                        
+
 
 
