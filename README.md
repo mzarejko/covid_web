@@ -14,5 +14,5 @@ Main goal of the program is to create a website for easy communication between p
   - [x]  exceptions management
   - [ ]  frontend (all)
   - [ ]  backend (all)
-  - [ ]  production on the herok site 
+  - [ ]  production on the herok cloud
   
