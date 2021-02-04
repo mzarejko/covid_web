@@ -1,4 +1,4 @@
-# covid_web
+# covid web
 
 ### Cel
 Main goal of the program is to create a website for easy communication between people in quarantine who need store products and people willing to help. 
@@ -14,4 +14,5 @@ Main goal of the program is to create a website for easy communication between p
   - [x]  exceptions management
   - [ ]  frontend (all)
   - [ ]  backend (all)
+  - [ ]  production on the herok site 
   
