@@ -17,4 +17,4 @@ Main goal of the program is to create a website for easy communication between p
   - [ ]  production on the herok cloud
   
  ## current page layout 
-![alt text](../main/127189281_400856931109321_7668519763450585592_n.png?raw=true)
+![alt text](../main/przk.png?raw=true)
