@@ -1,22 +1,25 @@
 import React, {Component} from 'react';
 import './App.css';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import Register from './pages/Authentication/Register.js';
-import Login from './pages/Authentication/Login.js';
-import MainPage from './pages/MainPage/MainPage.js';
+import {Router, Switch, Route} from 'react-router-dom';
+import Login from './pages/Authentication/Login';
+import Register from './pages/Authentication/Register';
+import MainPage from './pages/MainPage/MainPage';
+import {history} from './utils/history';
+import PrivateRoute from './components/Routes/PrivateRoute';
+import {urls} from './utils/urls';
 
 class App extends Component {
     render(){
         return (
-            <>
-                <Router>
-                    <Switch>
-                        <Route path='/register' exact component={Register} />
-                        <Route path='/' exact component={Login} />
-                        <Route path='/home' exact component={MainPage} />
-                    </Switch>
-                </Router>
-            </>
+        <div>
+            <Router history = {history}>
+                <Switch>
+                    <Route exact path={urls.LOGIN} component={Login} />
+                    <Route path={urls.REGISTER} component={Register} />
+                    <PrivateRoute path={urls.HOME} component={MainPage}  />
+                </Switch>
+            </Router>
+        </div>
         );
         
     }

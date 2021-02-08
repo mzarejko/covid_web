@@ -1,7 +1,7 @@
 from .models import User  
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import UserSerializer, RegisterSerializer, LoginSerializer
+from .serializers import RegisterSerializer, LoginSerializer
 from django.http import Http404 
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework import status 
@@ -12,6 +12,7 @@ from django.urls import reverse
 import jwt
 from django.conf import settings
 from Members.models import Volunteer, Needy
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 class LoginAPI(APIView):
     permission_classes = [AllowAny]
@@ -97,7 +98,6 @@ class VerifyEmail(APIView):
             return Response({'error': 'invalid token'}, status=status.HTTP_400_BAD_REQUEST)
 
 class LogoutAPI(APIView):
-    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         print(request.data)
@@ -107,3 +107,4 @@ class LogoutAPI(APIView):
         except TokenError:
             return Response({'error': 'Token is invalid or expired'})
         return Response({'Successful logout'}, status=status.HTTP_204_NO_CONTENT)
+

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './auth_style.css';
 import { Link } from 'react-router-dom';
-import {Redirect} from 'react-router-dom';
-import axios from 'axios';
+import {login} from '../../actions/auth';
+import {urls} from '../../utils/urls';
 
 class Login extends Component {
     
@@ -15,6 +15,9 @@ class Login extends Component {
         };
     }
 
+    update_error = (response) => {
+        this.setState({error: response})
+    }
 
     changeValue = (event) => {
         this.setState({
@@ -22,19 +25,8 @@ class Login extends Component {
         });
     }
     
-    handleSubmit = (event) => {
-        event.preventDefault();
-        axios.post('http://0.0.0.0:8000/accounts/login/', {
-            "username": this.state.username,
-            "password": this.state.password
-        }).then((response) => {
-            localStorage.setItem('access_token', response.data.access);
-            localStorage.setItem('refresh_token', response.data.refresh);
-            this.props.history.push('/home/'); 
-        }).catch((error) => {
-            this.setState({error: error.request.response})
-            console.log(error)
-        });
+    sign_in = () => {
+        login(this.state.username, this.state.password, this.update_error)
     }
     
 
@@ -67,11 +59,10 @@ class Login extends Component {
                     </div>
                     <div className="rows">
                         <div className='items'>
-                        
-                            <button onClick={this.handleSubmit}>login</button>
+                            <button onClick={this.sign_in}>login</button>
                         </div>
                         <div className='items'>
-                            <Link to='/register'><button>Sign up</button></Link>
+                            <Link to={urls.REGISTER}><button>Sign up</button></Link>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './auth_style.css';
-import axios from 'axios';
+import {register} from '../../actions/auth';
 
 class Register extends Component {
     
@@ -28,29 +28,25 @@ class Register extends Component {
         });
     }
     
-
+    error_updater = (response) => {
+        this.setState({error : response})
+    }
 
     handleSubmit = () => {
-        axios.post('http://0.0.0.0:8000/accounts/register/', {
-            "username": this.state.username,
-            "email": this.state.email,
-            "country": this.state.country,
-            "town": this.state.town,
-            "telephone": this.state.telephone,
-            "birth": this.state.birth,
-            "description": this.state.description,
-            "password": this.state.password,
-            "firstname": this.state.firstname,
-            "lastname": this.state.lastname 
-        }).then((resp) => {
-            this.setState({
-                error: resp.request.response 
-            });
-        }).catch((err) =>{
-            this.setState({
-                error: err.request.response 
-            });
-        });
+        const response = register(
+            this.state.username,
+            this.state.email,
+            this.state.country,
+            this.state.town,
+            this.state.telephone,
+            this.state.birth,
+            this.state.description,
+            this.state.password,
+            this.state.firstname,
+            this.state.lastname,
+            this.error_updater
+        )
+        this.setState({error : response}) 
     }
    
     render(){

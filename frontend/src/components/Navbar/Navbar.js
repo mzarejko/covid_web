@@ -32,7 +32,9 @@ class Navbar extends Component {
                     <Link to="#" className='menu-bars left'>
                         <FaIcons.FaBars onClick={this.handleClick} />
                     </Link>
-                    <Button buttonStyle='outline' onClick={this.props.logout} >logout</Button>
+                    <div className='logout'>
+                        <Button buttonStyle='outline' onClick={this.props.logout} >logout</Button>
+                    </div>
                 </div>
                 <nav className={this.state.active_bar ? 'nav-menu' : 'nav-active'}>
                     <ul className='nav-menu-items' onClick={this.handleClick}>

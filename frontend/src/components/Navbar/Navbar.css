@@ -2,23 +2,26 @@
     background: linear-gradient(90deg, rgb(44, 44, 44) 0%, rgb(24, 21, 19) 100%);
     font-size: 1.2rem;
     display: flex;
-    justify-content: left;
-    display: flex;
+    flex-direction: row;
     height: 50px;
     top: 0;
+    margin: 0;
     position: sticky;
     align-items: center;
     border-radius: 0px;
+    justify-content: space-between;
 }
 
+.logout {
+    padding: 1rem;
+}
 
 .menu-bars {
-    margine-left: 2rem;
+    flex-grow: 1;
     padding: 1rem;
     font-size: 2rem;
     background: none;
 }
-
 
 .nav-menu {
     background-color: #181818;
@@ -44,7 +47,6 @@
     left: 0px; 
     transition: 250ms;
     z-index: 999;
-
 }
 
 .nav-text {
@@ -83,12 +85,4 @@
 }
 
 
-.logo {
-    padding: 0px 40px;
-    color: #40ABE1
-}
 
-.signup {
-    dispaly: flex;
-    align-item: fixed;
-}

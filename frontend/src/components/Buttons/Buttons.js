@@ -27,14 +27,12 @@ class Button extends Component {
     checkButtonStyle = () => {
       const style = BUTTONS.STYLE.includes(this.state.buttonStyle) ? 
             this.state.buttonStyle : BUTTONS.STYLE[0];
-        console.log(style)
         return style;
     }
     
     checkButtonSize = () => {
       const size = BUTTONS.SIZE.includes(this.state.buttonSize) ? 
             this.state.buttonSize : BUTTONS.SIZE[0];
-        console.log(size)
         return size;
     }
 

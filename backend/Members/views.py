@@ -7,14 +7,15 @@ from rest_framework.response import Response
 from rest_framework import status
 
 class ActivateVolunteer(APIView):
-    permission_classes=[IsAuthenticated, IsNeedyInactive]
+    permission_classes=[IsAuthenticated]
     
     def put(self, request):
+        needy = Needy.objects.get(user=request.user)
         volunteer = Volunteer.objects.get(user=request.user)
-        if not volunteer.is_active:
-            volunteer.is_active = True
-            volunteer.save()
-            return Response({'volunteer': 'Successfully activated'}, status=status.HTTP_200_OK)
+        needy.is_active = False
+        volunteer.is_active = True
+        volunteer.save()
+        return Response({'volunteer': 'Successfully activated'}, status=status.HTTP_200_OK)
 
 class DeactivateVolunteer(APIView):
     permission_classes=[IsAuthenticated, IsNeedyInactive]
@@ -38,14 +39,15 @@ class UpdateScore(APIView):
 
 
 class ActivateNeedy(APIView):
-    permission_classes=[IsAuthenticated, IsVolunteerInactive]
+    permission_classes=[IsAuthenticated]
 
     def put(self, request):
         needy = Needy.objects.get(user=request.user)
-        if not needy.is_active:
-            needy.is_active = True
-            needy.save()
-            return Response({'needy': 'Successfully activated'}, status=status.HTTP_200_OK)
+        volunteer = Volunteer.objects.get(user=request.user)
+        volunteer.is_active = False
+        needy.is_active = True
+        needy.save()
+        return Response({'needy': 'Successfully activated'}, status=status.HTTP_200_OK)
     
 class DeactivateNeedy(APIView):
     permission_classes=[IsAuthenticated, IsVolunteerInactive]

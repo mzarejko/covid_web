@@ -5,6 +5,7 @@
 
 .btn {
     padding: 8px 20px;
+    margin: 5px;
     outline: none;
     border: none;
     cursor: pointer;
@@ -31,7 +32,7 @@
 }
 
 .large {
-    padding: 12px 26px;
+    padding: 5px 26px;
     font-size: 20px;
 }
 
