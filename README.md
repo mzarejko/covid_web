@@ -18,4 +18,4 @@ Main goal of the program is to create a website for easy communication between p
   - [x]  announcements management
  
  ## current page layout 
-![alt text](../main/przk.png?raw=true)
+![alt text](../main/obraz2.png?raw=true)
