@@ -2,5 +2,8 @@
 export const urls = {
     LOGIN : '/',
     HOME : '/home',
-    REGISTER : '/register'
+    REGISTER : '/register',
+    SHOPPING : '/shopping',
+    PROFIL : '/profil',
+    COVID : '/covid'
 }

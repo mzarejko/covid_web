@@ -3,6 +3,8 @@ from rest_framework.exceptions import ValidationError, PermissionDenied, NotAuth
 from django.http import Http404 
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
+from django.shortcuts import render
+
 
 def custome_exception_handler(exc, context):    
     response = exception_handler(exc, context)
@@ -14,7 +16,7 @@ def custome_exception_handler(exc, context):
     elif isinstance(exc, NotAuthenticated):
         create_authentication_error(exc, context, response)
     elif isinstance(exc, Http404):
-        create_404(exc, context, response)
+        create_404(response)
     elif isinstance(exc, AuthenticationFailed):
         token_expired(response)
 

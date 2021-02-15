@@ -173,7 +173,7 @@ CELERY_ENABLE_UTC = True
 CELERY_BEAT_SCHEDULE = {
     'scheduled_task' : {
         'task': 'Covid.tasks.updateDatabase',
-        'schedule' : crontab(hour=0, minute=0),
+        'schedule': crontab(hour=0, minute=0),
     },
 }
 

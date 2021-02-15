@@ -1,0 +1,80 @@
+.Box {
+    position: fixed;
+    min-width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: rgba(0,0,0, 0.5);
+}
+
+.innerBox {
+    position: flex;
+    align-items: center;
+    margin: 180px auto;
+    width: 900px;
+    height: 700px;
+    background: white;
+    overflow-y: scroll;
+    flex-direction: column;
+}
+
+.options {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 20px;    
+}
+
+
+.inputs {
+    padding: 10px 10rem 0 0;
+}
+
+.inputs > input {
+    margin: 2px;
+}
+
+.rows {
+    display: flex;
+    flex-direction: column;
+}
+
+.unassigned {
+}
+
+.assigned {
+    text-decoration-line: line-through;
+    
+}
+
+
+.item {
+    margin: 20px;
+    width: 100%;
+}
+
+.item > p {
+    color: #707070;
+}
+
+.main_inf > h2 {
+    font-size: 28px;
+}
+
+.main_inf {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 300px auto auto auto auto;
+    grid-gap: 4rem;
+}
+
+.main_inf > p {
+    color: #707070;
+    padding-top: 17px;
+    margin: 0 0 0 20px;
+} 
+
+
+

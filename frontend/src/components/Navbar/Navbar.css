@@ -10,6 +10,7 @@
     align-items: center;
     border-radius: 0px;
     justify-content: space-between;
+    z-index: 5;
 }
 
 .logout {

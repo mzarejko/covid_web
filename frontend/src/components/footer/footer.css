@@ -1,0 +1,23 @@
+.footer {
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10rem;
+    height: 40vh;
+    word-spacing: 50px; 
+    font-size:15px;
+    color: #fff;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    margin: 20px;
+    padding: 30px;
+}
+
+.item {
+    cursor: pointer;
+}

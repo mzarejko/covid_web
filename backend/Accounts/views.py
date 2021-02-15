@@ -28,7 +28,6 @@ class LoginAPI(APIView):
 
     def post(self, request):
         data = self.fix_dic(request.data)
-        print(data)
         serializer = LoginSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -49,7 +48,6 @@ class RegisterAPI(APIView):
 
     def post(self, request):
         data = self.fix_dic(request.data)
-        print(data)
         serializer = RegisterSerializer(data=data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()

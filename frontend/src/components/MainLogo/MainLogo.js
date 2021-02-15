@@ -30,7 +30,7 @@ class MainLogo extends Component {
     render() {
         return (
             <div className='MainLogo'>
-                <video src={base_paths.MAIN_VIDEO} autoPlay loop muted type="video/mp4" />
+                <img src={base_paths.MAIN_VIDEO} />
                 <h1>WHO YOU ARE?</h1>
                 <p>select a class</p>
                 <div className="ctg">

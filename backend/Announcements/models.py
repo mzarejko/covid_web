@@ -12,15 +12,14 @@ class Product(models.Model):
     name = models.CharField(max_length=45)
     description = models.CharField(max_length=100, null=True, blank=True)
     priority = models.IntegerField(default=0)
-    date = models.DateTimeField()
+    date = models.DateField()
     announcement = models.ForeignKey(Announcement, on_delete=models.CASCADE)
     volunteer = models.ForeignKey(Volunteer, on_delete=models.SET_NULL, null=True, blank=True)
+    
 
-    def __str__(self):
-        return self.name
     
     # set datetime with create product
     def save(self, *args, **kwargs):
         if not self.id:
-            self.date = timezone.now()
+            self.date = timezone.now().date()
         return super(Product, self).save(*args, **kwargs)

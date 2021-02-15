@@ -1,6 +1,6 @@
 from .models import Announcement, Product
 from .serializers import AnnouncementSerializer, ProductSerializer 
-from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView, CreateAPIView
 from rest_framework.views import APIView 
 from rest_framework.permissions import IsAuthenticated 
 from Members.permissions import IsNeedyActive, IsVolunteerActive, IsNeedyOwner 
@@ -10,6 +10,8 @@ from django.http import Http404
 from rest_framework.response import Response
 from rest_framework import status 
 from .filter_class import AnnouncementFilter, ProductFilter 
+from rest_framework.exceptions import ValidationError
+from rest_framework import status 
 
 # announcements for public
 class ListAnnouncements(ListAPIView):
@@ -42,23 +44,31 @@ class SetAnnouncement(CreateAPIView):
     permission_classes = [IsAuthenticated, IsNeedyActive]
     serializer_class = AnnouncementSerializer 
 
+
     def perform_create(self, serializer):
         needy = Needy.objects.get(user=self.request.user)
         return serializer.save(needy=needy)
 
-class UpdateAnnouncement(RetrieveUpdateDestroyAPIView):
+class DeleteAnnouncement(DestroyAPIView):
     permission_classes = [IsAuthenticated, IsNeedyActive, IsNeedyOwner]
     serializer_class = AnnouncementSerializer 
     lookup_field="pk"
     queryset = Announcement.objects.all()
    
-class ListProducts(ListAPIView):
+class ListAssignedProducts(ListAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = ProductSerializer 
-    filterset_class = ProductFilter 
 
     def get_queryset(self):
-        products = Product.objects.filter(announcement = self.kwargs["pk"])
+        products = Product.objects.filter(announcement = self.kwargs["pk"]).exclude(volunteer=None)
+        return products
+
+class ListUnassignedProducts(ListAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = ProductSerializer 
+
+    def get_queryset(self):
+        products = Product.objects.filter(announcement = self.kwargs["pk"]).filter(volunteer=None)
         return products
 
 class SetProduct(CreateAPIView):
@@ -69,25 +79,24 @@ class SetProduct(CreateAPIView):
         announcement = Announcement.objects.get(pk = self.kwargs["pk"])
         return serializer.save(announcement = announcement)
 
-class UpdateProduct(APIView):
+class DeleteProduct(APIView):
     permission_classes = [IsAuthenticated, IsNeedyActive, IsNeedyOwner, IsProductNotAssigned]
    
     def get_object(self, pk, product_pk):
         try:
-            product = Product.objects.get(product_pk=product_pk)
+            announcement = Announcement.objects.get(pk=pk)
+            product = Product.objects.get(pk=product_pk)
+            if product.announcement != announcement:
+                ValidationError("product not in selected announcement!", status=status.HTTP_404_NOT_FOUND)
         except Product.DoesNotExist:
+            raise Http404 
+        except Announcement.DoesNotExist:
             raise Http404 
         return product 
 
-    def put(self, request, product_pk):
-        product = self.get_object(product_pk)
-        serializer = ProductSerializer(product, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
 
     def delete(self, request, pk, product_pk):
-        product = self.get_object(product_pk)
+        product = self.get_object(pk, product_pk)
         product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -96,11 +105,14 @@ class AssignProduct(APIView):
     permission_classes = [IsAuthenticated, IsVolunteerActive, IsProductNotAssigned]
 
     def put(self, request, pk, product_pk):
-        product = Product.objects.get(product_id=product_pk)
+        product = Product.objects.get(pk=product_pk)
+        announcement = Announcement.objects.get(pk=pk)
         volunteer = Volunteer.objects.get(user=request.user) 
-        product.volunteer = volunteer
-        product.save()
-        return Response({'product' : 'Successfully assigned to product'}, status = status.HTTP_200_OK)
+        if product.announcement == announcement:
+            product.volunteer = volunteer
+            product.save()
+            return Response({'product' : 'Successfully assigned to product'}, status = status.HTTP_200_OK)
+        return Response({'product not in selected announcement'})
 
     
 class ListMyAssignedProduct(ListAPIView):

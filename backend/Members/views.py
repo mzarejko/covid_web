@@ -15,6 +15,7 @@ class ActivateVolunteer(APIView):
         needy.is_active = False
         volunteer.is_active = True
         volunteer.save()
+        needy.save()
         return Response({'volunteer': 'Successfully activated'}, status=status.HTTP_200_OK)
 
 class DeactivateVolunteer(APIView):
@@ -47,6 +48,7 @@ class ActivateNeedy(APIView):
         volunteer.is_active = False
         needy.is_active = True
         needy.save()
+        volunteer.save()
         return Response({'needy': 'Successfully activated'}, status=status.HTTP_200_OK)
     
 class DeactivateNeedy(APIView):
