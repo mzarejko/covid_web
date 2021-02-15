@@ -19,3 +19,4 @@ Main goal of the program is to create a website for easy communication between p
  
  ## current page layout 
 ![alt text](../main/obraz2.png?raw=true)
+![alt text](../main/obraz3.png?raw=true)
