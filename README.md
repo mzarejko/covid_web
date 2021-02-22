@@ -33,7 +33,7 @@ As user you can choose to be volunteer or needy, depending on the selected categ
   djangorestframework                                                   
                                                       
       
- More info about useed library in dockerfiles and [requierements.txt](./backend/requirements.txt)
+ More info about useed library in dockerfiles ([frontend](./frontend/Dockerfile), [backend](./backend/Dockerfile)) and [requierements.txt](./backend/requirements.txt)
                                 
 
 
