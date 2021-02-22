@@ -21,7 +21,7 @@ As user you can choose to be volunteer or needy, depending on the selected categ
 
   - docker 20.10
   - docker-compose 1.27
-<center>
+
 
    backend                            | frontend                        
 ------------------------------|-------------------------------------------                                                                     
@@ -33,7 +33,7 @@ As user you can choose to be volunteer or needy, depending on the selected categ
   python 3.8                     |          react-router-dom                                                                                     
   djangorestframework                                                   
       
-</center>
+
 
       
  More info about useed library in dockerfiles ([docker-compose](./docker-compose.yml), [frontend](./frontend/Dockerfile), [backend](./backend/Dockerfile)) and [requierements.txt](./backend/requirements.txt)
