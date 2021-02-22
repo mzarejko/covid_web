@@ -5,11 +5,11 @@ Program is website for easy communication between people in quarantine who need 
 
 ### Contents
 
-1. [Info](#info)
-2. [Technologies](#Technologies)
-3. [Setup](#Setup)
-4. [Status](#Status)
-5. [Layout](#Layout)
+1. ["General Info"](#General info)
+2. ["Technologies"](#Technologies)
+3. ["Setup"](#Setup)
+4. ["Status"](#Status)
+5. ["Current page layout"](#Layout)
 
 
 ## Status
