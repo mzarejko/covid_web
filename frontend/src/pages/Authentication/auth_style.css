@@ -1,13 +1,26 @@
+.outbox {
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.6);
+}
+
+
 .box {
-    background-color: lavender;
+    background-color: rgb(40, 43, 46);
+    position: absolute;
     dispaly: flex;
     flex-direction: column;
     border-radious: 4px;
     align-items: center;
     margin: 30px auto;
-    padding: 10px 10px;
-    width: 650px;
-    box-shadow: 2px 4px 10px 4px rgba(0, 0, 255, .2);
+    left: 0; 
+    right: 0;
+    padding: 10px;
+    width: 600px;
+    box-shadow: 2px 4px 10px 4px rgba(22, 22, 22, .3);
+    color: #fff;
 }
 
 .columns {
@@ -25,12 +38,14 @@
 }
 
 textarea {
+    background-color: rgb(40, 43, 46);
     width: 100%;
     max-width: 100%;
     min-width: 100%;
     height: 200px;
     border-radious: 4px;
     float: right;
+    color: #fff;
 }
 
 .rows {
@@ -40,7 +55,7 @@ textarea {
 }
 
 button {
-    background-color: steelblue;
+    background-color: rgb(30, 33, 36, 0.9);
     height: 40px;
     font-size: 1.8rem;
     color: white;
@@ -53,5 +68,18 @@ button {
 }
 
 button:hover {
-  background-color: #335A87;
+    background-color: rgb(10, 13, 16, 0.9);
 }
+
+
+.items > input {
+    background-color: rgb(40, 43, 46);
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: groove;
+}
+
+
+
+

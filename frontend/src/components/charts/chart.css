@@ -1,13 +1,77 @@
-.chart {
-    box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.6);
-    padding: 8rem;
-    align-items: center;
+.field {
     display: flex;
     flex-direction: column;
+    height: 100%; 
+    height: 140vh;
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.6);
+    overflow-x: hidden;
+    max-width: 100%;
 }
 
-.chart > h1 {
-    font-weight: bold;    
+.nap {
+    margin: 10px;
+    position: absolute;
     color: #fff;
+    top: 120%;
+    left: 70px;
+    font-family: 'Trebuchet MS', 'Lucida Sans',  sans-serif;
+    transition: all 0.5s ease-out;
 }
 
+.nap-hide {
+    opacity: 0;
+}
+
+.nap-show {
+    opacity: 1;
+}
+
+.chart {
+    margin: 20px;
+    padding: 30px;
+    position: absolute;
+    top: 150%;
+    border-radius: 4px;
+    box-shadow: 2px 4px 11px 8px rgba(11, 11, 15, .5);
+    background-color: rgb(30, 33, 36);
+    width: 1000px;
+    height: 600px;
+    transition: all 0.5s ease-out;
+    right: 30px;
+}
+
+.chart-show {
+    right: 30px;
+    opacity:1;
+}
+
+.chart-hide {
+    right: 1000px;
+    opacity: 0;
+}
+
+@media screen and (max-width: 1200px) {
+    .chart {
+       width: 800px;
+       height: 500px;
+    }
+
+}
+
+
+
+@media screen and (max-width: 900px) {
+    .chart {
+       width: 600px;
+       height: 400px;
+    }
+
+}
+
+@media screen and (max-width: 700px) {
+    .chart {
+       width: 400px;
+       height: 300px;
+    }
+
+}

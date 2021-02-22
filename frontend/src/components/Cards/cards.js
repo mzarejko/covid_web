@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
-import {listMyAnnoncement} from '../../actions/profile';
 import './cards.css'
-import ProductsBox from '../ProductsBox/ProductsBox'; 
+import ProductsBox from './ProductsBox'; 
+import SearchBar from '../Bar/Bar';  
+import {setAnnouncement} from '../../actions/profile';
+import {listAnnoncement} from '../../actions/profile';
 
 class Cards extends Component {
 
@@ -12,6 +13,7 @@ class Cards extends Component {
             announcement_id : null,
             popup: false
         }
+
     }    
     
     update_id = (index) => {
@@ -31,9 +33,9 @@ class Cards extends Component {
         return (
             <>
             <div className='cards'>
-                {this.props.result.map((item, index) =>{
+                {this.props.result.map((item) =>{
                     return (
-                        <li key={index}>
+                        <li key={item.pk}>
                             <div className='card' onClick={(event) => 
                                                                 this.update_id(item.pk)}>
                                 <h2>{item.address}</h2>
@@ -51,4 +53,8 @@ class Cards extends Component {
     }
 }
 
-export default Cards;
+export default SearchBar(Cards, 
+                        setAnnouncement, 
+                        listAnnoncement,
+                        "address",
+                        "description");

@@ -3,35 +3,49 @@ import './auth_style.css';
 import { Link } from 'react-router-dom';
 import {login} from '../../actions/auth';
 import {urls} from '../../utils/urls';
+import {base_paths} from '../../utils/Endpoints'; 
+import Error_displayer from '../../components/error_manager/error_displayer';
+import {update_error, delete_error} from '../../actions/error_management'; 
 
 class Login extends Component {
+
     
     constructor(props){
         super(props)
         this.state={
             username: "",
             password: "",
-            error: ""
+            errors: [] 
         };
     }
 
-    update_error = (response) => {
-        this.setState({error: response})
-    }
 
     changeValue = (event) => {
         this.setState({
             [event.target.name]: event.target.value
         });
     }
-    
-    sign_in = () => {
-        login(this.state.username, this.state.password, this.update_error)
-    }
-    
 
+   
+    update_login_error = (response) => {
+        let updated = update_error(response, this.state.errors)
+        this.setState({errors : updated})
+    }
+
+    delete_login_error = (item) => {
+        let deleted = delete_error(item, this.state.errors)
+        this.setState({errors : deleted})
+    }
+
+
+    sign_in = () => {
+        login(this.state.username, this.state.password, this.update_login_error)
+    }
+   
     render(){    
         return (
+            <div className="outbox">
+                <img src={base_paths.MAIN_VIDEO} />
             <div className="box">
                 <div className="columns">
                     <div className="rows">
@@ -67,7 +81,10 @@ class Login extends Component {
                     </div>
                 </div>
             </div>
+            <Error_displayer  errors={this.state.errors} remove={this.delete_login_error} /> 
+            </div>
         );
     }
 }
+
 export default Login;

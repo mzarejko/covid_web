@@ -15,7 +15,7 @@ class Product(models.Model):
     date = models.DateField()
     announcement = models.ForeignKey(Announcement, on_delete=models.CASCADE)
     volunteer = models.ForeignKey(Volunteer, on_delete=models.SET_NULL, null=True, blank=True)
-    
+    username = models.CharField(max_length=45, null=True, blank=True)
 
     
     # set datetime with create product

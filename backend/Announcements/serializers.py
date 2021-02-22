@@ -9,9 +9,11 @@ class AnnouncementSerializer(serializers.ModelSerializer):
         
 class ProductSerializer(serializers.ModelSerializer):
     date=serializers.DateField(read_only=True, format="%d-%m-%Y")
+    username=serializers.CharField(read_only=True, max_length=45)
 
     class Meta:
         model= Product
-        fields = ['pk', 'name', 'description', 'priority', 'date']
+        fields = ['pk', 'name', 'description', 'priority', 'date', 'username']
         
+    
 

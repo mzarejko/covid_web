@@ -1,0 +1,134 @@
+.Box {
+    position: fixed;
+    min-width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: rgba(0,0,0, 0.5);
+}
+
+.innerBox {
+    position: flex;
+    align-items: center;
+    margin: 180px auto;
+    width: 900px;
+    height: 700px;
+    background-color: rgb(30, 33, 36);
+    overflow-y: scroll;
+    flex-direction: column;
+}
+
+.options {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 20px;    
+}
+
+
+.act_btn {
+    display: flex;
+    flex-direction: row;
+}
+
+.inputs {
+    padding: 10px 10rem 0 0;
+}
+
+.inputs > input {
+    margin: 5px;
+    background-color: rgb(30, 33, 36);
+    color: #fff;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: groove;
+}
+
+.rows {
+    display: flex;
+    flex-direction: column;
+}
+
+.unassigned {
+    color: #fff;
+}
+
+.assigned {
+    color: #444444; 
+}
+
+
+.item {
+    margin: 20px;
+    width: 100%;
+}
+
+.item > p {
+    color: #707070;
+}
+
+.main_inf > h2 {
+    font-size: 28px;
+}
+
+.main_inf {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 300px auto auto auto auto;
+    grid-gap: 4rem;
+}
+
+.main_inf > p {
+    padding-top: 25px;
+    margin: 0 0 0 20px;
+} 
+
+.main_btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+
+
+@media screen and (max-width: 1000px) {
+    .innerBox {
+        width: 700px;
+        height: 500px;
+    }
+}
+
+
+
+@media screen and (max-width: 700px) {
+    .innerBox {
+        width: 400px;
+        height: 200px;
+    }
+
+    .act_btn {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+    }
+
+    .main_inf > h2 {
+        font-size: 18px;
+    }
+
+    .main_inf {
+        display: grid;
+        grid-template-columns: 10px 100px 2px 2px;
+    }
+    .main_btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+

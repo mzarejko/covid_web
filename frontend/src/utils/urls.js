@@ -4,6 +4,5 @@ export const urls = {
     HOME : '/home',
     REGISTER : '/register',
     SHOPPING : '/shopping',
-    PROFIL : '/profil',
-    COVID : '/covid'
+    PROFIL : '/profile',
 }

@@ -25,9 +25,7 @@ export const login = (username, password, error_func) => {
             localStorage.setItem('refresh_token', response.data.refresh);
             history.push(urls.HOME); 
         }).catch((error) => {
-            if(!!error_func){
-                error_func(error.request.response)    
-            }
+            error_func(error.request.response)    
         });
     }
 
@@ -46,13 +44,9 @@ export const register = (username, email, country, town, telephone,
             "firstname": firstname,
             "lastname": lastname 
         }).then((resp) => {
-            if(!!error_func){
-                error_func(resp.request.response)    
-            }
+            error_func(resp.request.response)    
         }).catch((error) =>{
-            if(!!error_func){
-                error_func(error.request.response)    
-            }
+            error_func(error.request.response)    
         });
     }
 

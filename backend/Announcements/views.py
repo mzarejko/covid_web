@@ -12,6 +12,7 @@ from rest_framework import status
 from .filter_class import AnnouncementFilter, ProductFilter 
 from rest_framework.exceptions import ValidationError
 from rest_framework import status 
+from Accounts.models import User
 
 # announcements for public
 class ListAnnouncements(ListAPIView):
@@ -108,7 +109,9 @@ class AssignProduct(APIView):
         product = Product.objects.get(pk=product_pk)
         announcement = Announcement.objects.get(pk=pk)
         volunteer = Volunteer.objects.get(user=request.user) 
+        username = User.objects.get(volunteer=volunteer).username
         if product.announcement == announcement:
+            product.username = username 
             product.volunteer = volunteer
             product.save()
             return Response({'product' : 'Successfully assigned to product'}, status = status.HTTP_200_OK)

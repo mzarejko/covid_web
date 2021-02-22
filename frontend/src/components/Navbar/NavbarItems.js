@@ -11,11 +11,6 @@ export const NavbarItems = [
         cName: 'nav-text'
     },
     {
-        path: '/covid',
-        icon: <RiIcons.RiVirusLine />,
-        cName: 'nav-text'
-    },
-    {
         path: '/shopping',
         icon: <TiIcons.TiShoppingCart />,
         cName: 'nav-text'

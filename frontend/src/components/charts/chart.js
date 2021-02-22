@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import './chart.css';
 import {getData} from '../../actions/covid';
 import { Line } from 'react-chartjs-2';
+import Error_displayer from '../../components/error_manager/error_displayer';
+import {update_error, delete_error} from '../../actions/error_management'; 
+
 
 
 
@@ -16,14 +19,24 @@ class Charts extends Component {
             country : null,
             deaths_total : null,
             deaths_x : null,
-            deaths_y : null
+            deaths_y : null,
+            errors : []
         }
+    }
+    
+    update_chart_error = (response) => {
+        let updated = update_error(response, this.state.errors)
+        this.setState({errors : updated})
+    }
+
+    delete_chart_error = (item) => {
+        let deleted = delete_error(item, this.state.errors)
+        this.setState({errors : deleted})
     }
 
     componentDidMount(){
         getData()
             .then((response)=>{
-                console.log(response.data)
                 this.setState({
                     confirmed_total: response.data[0].confirmed_total,
                     confirmed_x : response.data[0].confirmed_x,
@@ -34,7 +47,7 @@ class Charts extends Component {
                     deaths_y : response.data[0].deaths_y
                 })
             })
-        .catch((error) => {console.log(error)})
+        .catch((error) => {this.update_chart_error(error.request.response)})
     }
 
    
@@ -65,21 +78,59 @@ class Charts extends Component {
         return chartData
     }
 
+    
 
+    chartScroll = () => {
+        if(document.getElementById("chart")){ 
+            const id = document.getElementById("chart");
+            var y = window.scrollY;
+            if (y >= 800) {
+                id.className = "chart chart-show"
+            } else {
+                id.className = "chart chart-hide"
+            }
+                
+        }
+    };
+
+    chartnap = () => {
+        if (document.getElementById("nap")){
+            const id = document.getElementById("nap");
+            var y = window.scrollY;
+            if (y >= 600) {
+                id.className = "nap nap-show"
+            } else {
+                id.className = "nap nap-hide"
+            }
+            
+        }
+    };
 
     render() {
-        const styleRed = {color : 'red'};
+        window.addEventListener("scroll", this.chartScroll);
+        window.addEventListener("scroll", this.chartnap);
         return (
-            <div className="chart">
-                <h1>Total confirmed covid <span style={styleRed}>
-                                {this.state.confirmed_total}</span></h1>
-                <h1>Total death <span style={styleRed}>
-                                {this.state.deaths_total}</span></h1>
-                <Line data={this.create_chart_data(this.state.confirmed_x, 
-                            this.state.confirmed_y, 'confirmed data '+this.state.country,
-                            this.state.deaths_x, this.state.deaths_y, 
-                            'deaths data '+ this.state.country)} />
+            <>
+            <div className="field">
+                <div className="nap" id="nap">
+                    <h3>Total confirmed covid</h3> 
+                    {this.state.confirmed_total}
+                    <h3>Total death</h3> 
+                    {this.state.deaths_total}
+                </div>
+                <div className="chart" id="chart">
+                        <Line data={this.create_chart_data(this.state.confirmed_x, 
+                                    this.state.confirmed_y, 'confirmed data '+this.state.country,
+                                    this.state.deaths_x, this.state.deaths_y, 
+                                    'deaths data '+ this.state.country)} 
+                            options={{
+                                responsive: true,
+                                maintainAspectRatio: false,
+                        }}/>
+                </div>
             </div>
+                <Error_displayer  errors={this.state.errors} remove={this.delete_chart_error} /> 
+            </>
         )
     }
 }

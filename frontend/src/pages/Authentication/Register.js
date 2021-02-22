@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import './auth_style.css';
 import {register} from '../../actions/auth';
+import {base_paths} from '../../utils/Endpoints'; 
+import {update_error, delete_error} from '../../actions/error_management'; 
+import Error_displayer from '../../components/error_manager/error_displayer';
 
 class Register extends Component {
     
@@ -17,7 +20,7 @@ class Register extends Component {
             lastname: "",
             birth: "",
             description: "",
-            error: "",
+            errors: [],
         })
     }
 
@@ -28,12 +31,18 @@ class Register extends Component {
         });
     }
     
-    error_updater = (response) => {
-        this.setState({error : response})
+    update_register_error = (response) => {
+        let update = update_error(response, this.state.errors)
+        this.setState({errors : update})
+    }
+
+    delete_register_error = (item) => {
+        let deleted = delete_error(item, this.state.errors)
+        this.setState({errors : deleted})
     }
 
     handleSubmit = () => {
-        const response = register(
+        register(
             this.state.username,
             this.state.email,
             this.state.country,
@@ -44,13 +53,14 @@ class Register extends Component {
             this.state.password,
             this.state.firstname,
             this.state.lastname,
-            this.error_updater
+            this.update_register_error
         )
-        this.setState({error : response}) 
     }
    
     render(){
         return (
+            <div className="outbox">
+                <img src={base_paths.MAIN_VIDEO} />
                 <div className='box'>
                     <div className='columns'>
                         <div className='rows'> 
@@ -151,10 +161,9 @@ class Register extends Component {
                    <div className='items'>
                        <button onClick={this.handleSubmit}>register</button>
                    </div>
-                   <div className='items'>
-                       <p>{this.state.error}</p>
-                   </div>
                 </div>
+                <Error_displayer  errors={this.state.errors} remove={this.delete_register_error} /> 
+            </div>
         );
     }
 }

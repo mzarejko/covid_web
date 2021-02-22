@@ -13,18 +13,22 @@ import {url_deleteAnnouncement} from '../utils/Endpoints';
 export const setNeedy = (error_func) => {
     axiosInstance.put(base_paths.SET_NEEDY, {
     }).then((response) => {
-        error_func(response.data.needy)
+        console.log('response: ',response.data)
+        error_func(response.data)
     }).catch((error) => {
-        console.log(error)
+        console.log('error: ',error.data)
+        error_func(error.data)
     });
 }
 
 export const setVolunteer = (error_func) => {
     axiosInstance.put(base_paths.SET_VOLUNTEER, {
     }).then((response) => {
-        error_func(response.data.volunteer)
+        console.log('response: ',response.data)
+        error_func(response.data)
     }).catch((error) => {
-        console.log(error)
+        console.log('error: ',error.data)
+        error_func(error.data)
     });
 }
 
@@ -35,19 +39,11 @@ export const setAnnouncement = (description, address) => {
     })
 }
 
-export const listAnnoncement = (key, my=false) => {
-    if(!!key){
-        if (my){
-            return axiosInstance.get(base_paths.LIST_MY_ANNONCEMENT+'?address='+key)
-        }else{
-            return axiosInstance.get(base_paths.LIST_ANNONCEMENT+'?address='+key)
-        }
+export const listAnnoncement = (key) => {
+    if(key){
+        return axiosInstance.get(base_paths.LIST_ANNONCEMENT+'?address='+key)
     }else{
-        if (my){
-            return axiosInstance.get(base_paths.LIST_MY_ANNONCEMENT)
-        }else{
-            return axiosInstance.get(base_paths.LIST_ANNONCEMENT)
-        }
+        return axiosInstance.get(base_paths.LIST_ANNONCEMENT)
     }
 }
 
