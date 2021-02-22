@@ -1,9 +1,9 @@
 # covid web
 
-### Cel
-Main goal of the program is to create a website for easy communication between people in quarantine who need store products and people willing to help. 
+### Goal
+Program is website for easy communication between people in quarantine who need store products and people willing to help them. As user you can choose to be volunteer or needy, depending on the selected category, you have specific functions. Volunteer can create announcements and add products that he needs. Needy can assign to product which he want to buy for sick person. 
 
-## functionality
+## objective
 
   - [x]  registration
   - [x]  login
