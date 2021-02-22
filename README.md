@@ -21,38 +21,29 @@ As user you can choose to be volunteer or needy, depending on the selected categ
 
   - docker 20.10
   - docker-compose 1.27
-  
-#### backend:
 
-  - postgres
-  - rabbitmq
-  - celery
-  - celery-beat
-  - Django 4.0
-  - python 3.8 (net-tools, netcat)
-  - numpy
-  - djangorestframework
-  - django-filter
-  - psycopg2
-  - gunicorn
-  - python-environ
-  - django-cors-headers
-  - django-rest-auth
-  - pandas
-  - django_celery_results
-  - django_celery_beat
-  - django-filter
-  - pillow
+   backend                            | frontend                        
+--------------------------------------------------------------------------                                                                     
+  postgres                 | react (https://reactjs.org/docs/create-a-new-react-app.html#create-react-app)                                
+  rabbitmq                               |    node 10                             
+  celery                                  |       react-icons                       
+  celery-beat                             |        axios                        
+  Django 4.0                              |         react-chartjs-2                        
+  python 3.8 (net-tools, netcat)          |          react-router-dom                     
+  numpy                                   |                                 
+  djangorestframework                    |                                 
+  django-filter                          |                               
+  psycopg2                                |                     
+  gunicorn                                |
+  python-environ                        |
+  django-cors-headers                     |
+  django-rest-auth                      |
+  pandas                                  |
+  django_celery_results                 |
+  django_celery_beat                  |
+  django-filter                          |
+  pillow                                |
 
-#### frontend:
-
-  - react (https://reactjs.org/docs/create-a-new-react-app.html#create-react-app)
-  - node 10
-  - react-icons
-  - axios
-  - react-chartjs-2
-  - react-router-dom
-  
 
 ## Status <a name="Status"></a>
 
