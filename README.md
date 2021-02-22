@@ -23,7 +23,7 @@ As user you can choose to be volunteer or needy, depending on the selected categ
   - docker-compose 1.27
 
    backend                            | frontend                        
---------------------------------------------------------------------------                                                                     
+------------------------------|-------------------------------------------                                                                     
   postgres                 | react (https://reactjs.org/docs/create-a-new-react-app.html#create-react-app)                                
   rabbitmq                               |    node 10                             
   celery                                  |       react-icons                       
