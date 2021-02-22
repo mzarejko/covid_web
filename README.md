@@ -29,10 +29,11 @@ As user you can choose to be volunteer or needy, depending on the selected categ
   celery                                  |       react-icons                       
   celery-beat                             |        axios                        
   Django 4.0                              |         react-chartjs-2                        
-  python 3.8 (net-tools, netcat)          |          react-router-dom                                                                                     
+  python 3.8                     |          react-router-dom                                                                                     
   djangorestframework                                                   
                                                       
-                       
+      
+ More info about useed library in dockerfiles and [requierements.txt](./backend/requirements.txt)
                                 
 
 
