@@ -1,7 +1,9 @@
 # covid web
 
 ## Goal
-Program is website for easy communication between people in quarantine who need store products and people willing to help them. As user you can choose to be volunteer or needy, depending on the selected category, you have specific functions. Volunteer can create announcements and add products that he needs. Needy can assign to product which he want to buy for sick person. Additionally website show total amount of confirmed cases of covid and deaths. Data are downloaded and updated every day at midnight from the site https://github.com/CSSEGISandData/COVID-19.
+
+  - Program is website for easy communication between people in quarantine who need store products and people willing to help them.
+  - showing the current status of covid cases in Poland 
 
 ## Content
 
@@ -10,6 +12,10 @@ Program is website for easy communication between people in quarantine who need 
 3. [Setup](#Setup)
 4. [Status](#Status)
 5. [Current page layout](#layout)
+
+## General info <a name="info"></a>
+
+As user you can choose to be volunteer or needy, depending on the selected category, you have specific functions. Volunteer can create announcements and add products that he needs. Needy can assign to product which he want to buy for sick person. Additionally website show total amount of confirmed cases of covid and deaths. Data are downloaded and updated every day at midnight from the site https://github.com/CSSEGISandData/COVID-19.
 
 
 ## Status <a name="Status"></a>
