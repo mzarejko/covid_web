@@ -19,7 +19,8 @@ Main goal of the program is to create a website for easy communication between p
  
  ## current page layout 
  ### home/
-![alt text](../main/obraz1.png?raw=true)
+![alt text](../main/1.png?raw=true)
  ### shopping/
-![alt text](../main/obraz2.png?raw=true)
-![alt text](../main/obraz3.png?raw=true)
+![alt text](../main/2.png?raw=true)
+![alt text](../main/3.png?raw=true)
+![alt text](../main/4.png?raw=true)
