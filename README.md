@@ -30,19 +30,19 @@ As user you can choose to be volunteer or needy, depending on the selected categ
   celery-beat                             |        axios                        
   Django 4.0                              |         react-chartjs-2                        
   python 3.8 (net-tools, netcat)          |          react-router-dom                     
-  numpy                                   |                                 
-  djangorestframework                    |                                 
-  django-filter                          |                               
-  psycopg2                                |                     
-  gunicorn                                |
-  python-environ                        |
-  django-cors-headers                     |
-  django-rest-auth                      |
-  pandas                                  |
-  django_celery_results                 |
-  django_celery_beat                  |
-  django-filter                          |
-  pillow                                |
+  numpy                                                                  
+  djangorestframework                                                   
+  django-filter                                                       
+  psycopg2                                                  
+  gunicorn                                
+  python-environ                        
+  django-cors-headers                     
+  django-rest-auth                      
+  pandas                                  
+  django_celery_results                 
+  django_celery_beat                  
+  django-filter                          
+  pillow                                
 
 
 ## Status <a name="Status"></a>
