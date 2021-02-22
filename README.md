@@ -37,8 +37,12 @@ As user you can choose to be volunteer or needy, depending on the selected categ
 
       
  More info about useed library in dockerfiles ([docker-compose](./docker-compose.yml), [frontend](./frontend/Dockerfile), [backend](./backend/Dockerfile)) and [requierements.txt](./backend/requirements.txt)
- 
  react installation instruction is on this site https://reactjs.org/docs/create-a-new-react-app.html#create-react-app
+ 
+
+## Setup
+
+To make site working run, install [docker-engine](https://docs.docker.com/engine/install/) (dockerfiles in code are for linux)
                                 
 
 
