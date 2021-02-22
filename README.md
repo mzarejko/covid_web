@@ -13,9 +13,10 @@ Main goal of the program is to create a website for easy communication between p
   - [x]  possibility to choose a volunteer and a sick person 
   - [x]  exceptions management
   - [ ]  frontend (all)
-  - [x]  backend (all)
+  - [ ]  backend (all)
   - [ ]  production on the herok cloud
   - [x]  announcements management
+  - [ ]  changing password/forget password
  
  ## current page layout 
  ### home/
