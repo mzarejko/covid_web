@@ -46,7 +46,7 @@ To make site working install [docker-engine](https://docs.docker.com/engine/inst
 
      $ sudo docker-compose up --build
      
-After few minutes site should work at address 0.0.0.0:3000 with backend at 0.0.0.0:8000
+After few minutes site should work at address http://0.0.0.0:3000/ with backend at http://0.0.0.0:8000/
 
   
                                 
