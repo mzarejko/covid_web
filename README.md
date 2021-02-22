@@ -3,7 +3,7 @@
 ### Goal
 Program is website for easy communication between people in quarantine who need store products and people willing to help them. As user you can choose to be volunteer or needy, depending on the selected category, you have specific functions. Volunteer can create announcements and add products that he needs. Needy can assign to product which he want to buy for sick person. Additionally website show total amount of confirmed cases of covid and deaths. Data are downloaded and updated every day at midnight from the site https://github.com/CSSEGISandData/COVID-19.
 
-### Content
+## Content
 
 1. [General Info](#info)
 2. [Technologies](#Technologies)
@@ -12,7 +12,7 @@ Program is website for easy communication between people in quarantine who need 
 5. [Current page layout](#layout)
 
 
-## Status
+## Status <a name="Status"></a>
 
   - [x]  registration
   - [x]  login
@@ -27,7 +27,7 @@ Program is website for easy communication between people in quarantine who need 
   - [x]  announcements management
   - [ ]  changing password/forget password
  
- ## Current page layout 
+ ## Current page layout  <a name="layout"></a>
  ### home/
 ![alt text](../main/1.png?raw=true)
  ### shopping/
