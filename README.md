@@ -42,7 +42,7 @@ As user you can choose to be volunteer or needy, depending on the selected categ
 
 ## Setup
 
-To make site working install [docker-engine] and docker-compose (https://docs.docker.com/engine/install/) (dockerfiles in code are for linux), next type in terminal comand
+To make site working install [docker-engine](https://docs.docker.com/engine/install/)  and docker-compose ((dockerfiles in code are for linux), next type in terminal comand
 
      $ sudo docker-compose up --build
 
