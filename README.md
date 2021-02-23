@@ -43,7 +43,7 @@ As user you can choose to be volunteer or needy, depending on the selected categ
 
 ## Setup
 
-To make site working install [docker-engine](https://docs.docker.com/engine/install/)  and docker-compose (dockerfiles in repo are for linux), next you have to create in backend folder file with name .env where will by all private settigns. Example of file is shown below:
+To make site working install [docker-engine](https://docs.docker.com/engine/install/)  and docker-compose (dockerfiles in repo are for linux), next you have to create in backend folder file with name .env where will be all private settigns. Example of file is shown below:
 
      SECRET_KEY= 'random string of characters',
      DEBUG = 'True or False',
