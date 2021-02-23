@@ -43,11 +43,31 @@ As user you can choose to be volunteer or needy, depending on the selected categ
 
 ## Setup
 
-To make site working install [docker-engine](https://docs.docker.com/engine/install/)  and docker-compose (dockerfiles in repo are for linux), next type in terminal comand
+To make site working install [docker-engine](https://docs.docker.com/engine/install/)  and docker-compose (dockerfiles in repo are for linux), next you have to create in backend folder file with name .env where will by all private settigns. Example of file is shown below:
+
+     SECRET_KEY= 'random string of characters',
+     DEBUG = 'True or False',
+     
+     POSTGRES_HOST = 'name of database host',
+     PORT = 'port of database',
+     POSTGRES_DB = 'name of database',
+     POSTGRES_USER = 'username',
+     POSTGRES_PASSWORD = 'password',
+     
+     RABBITMQ_DEFAULT_USER = 'username of rabbitmq',
+     RABBITMQ_DEFAULT_PASS = 'password',
+     CELERY_BROKER_URL = 'pyamqp://[$RABBITMQ_DEFAULT_USER]:[$RABBITMQ_DEFAULT_PASS]@rabbitmq:5672//',
+     CELERY_RESULT_BACKEND = 'django-db',
+     
+     GMAIL = 'mail which will by send account activation mail to user',
+     PASS_GMAIL = 'password to mail'
+     
+Next type in terminal this command to start site
 
      $ sudo docker-compose up --build
      
 After few minutes site should work at address http://0.0.0.0:3000/ with backend at http://0.0.0.0:8000/
+
 
   
                                 
