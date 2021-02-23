@@ -59,7 +59,7 @@ To make site working install [docker-engine](https://docs.docker.com/engine/inst
      CELERY_BROKER_URL = 'pyamqp://[$RABBITMQ_DEFAULT_USER]:[$RABBITMQ_DEFAULT_PASS]@rabbitmq:5672//',
      CELERY_RESULT_BACKEND = 'django-db',
      
-     GMAIL = 'mail which will by send account activation mail to user',
+     GMAIL = 'mail which will send account activation mail to user',
      PASS_GMAIL = 'password to mail'
      
 Next type in terminal this command to start site
