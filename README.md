@@ -15,7 +15,7 @@
 
 ## General info <a name="info"></a>
 
-As user you can choose to be volunteer or needy, depending on the selected category, you have specific functions. Volunteer can create announcements and add products that he needs. Needy can assign to product which he want to buy for sick person. Additionally website show total amount of confirmed cases of covid and deaths on chart. Data are downloaded and updated every day at midnight from the site https://github.com/CSSEGISandData/COVID-19.
+As user you can choose to be volunteer or needy, depending on the selected category, you have specific functions. Volunteer can create announcements and add products that he needs. Needy can assign to product which he want to buy for sick person. Additionally website show total amount of confirmed cases of covid and deaths on chart. Data is downloaded and updated every day at midnight from the site https://github.com/CSSEGISandData/COVID-19.
 
 ## Technologies <a name="technologies"></a>
 
