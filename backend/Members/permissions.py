@@ -1,6 +1,5 @@
 from rest_framework import permissions
 from .models import Needy, Volunteer
-from rest_framework.exceptions import ValidationError
 
 class IsNeedyActive(permissions.BasePermission):
     message="Needy can only perform this action"

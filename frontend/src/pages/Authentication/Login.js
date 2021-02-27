@@ -5,7 +5,6 @@ import {login} from '../../actions/auth';
 import {urls} from '../../utils/urls';
 import {base_paths} from '../../utils/Endpoints'; 
 import Error_displayer from '../../components/error_manager/error_displayer';
-import {update_error, delete_error} from '../../actions/error_management'; 
 
 class Login extends Component {
 
@@ -15,8 +14,8 @@ class Login extends Component {
         this.state={
             username: "",
             password: "",
-            errors: [] 
         };
+        this.error_manager = React.createRef();
     }
 
 
@@ -26,20 +25,10 @@ class Login extends Component {
         });
     }
 
-   
-    update_login_error = (response) => {
-        let updated = update_error(response, this.state.errors)
-        this.setState({errors : updated})
-    }
-
-    delete_login_error = (item) => {
-        let deleted = delete_error(item, this.state.errors)
-        this.setState({errors : deleted})
-    }
-
-
     sign_in = () => {
-        login(this.state.username, this.state.password, this.update_login_error)
+        login(this.state.username, this.state.password, 
+            this.error_manager.current.update_error
+        )
     }
    
     render(){    
@@ -81,7 +70,7 @@ class Login extends Component {
                     </div>
                 </div>
             </div>
-            <Error_displayer  errors={this.state.errors} remove={this.delete_login_error} /> 
+            <Error_displayer ref={this.error_manager} />
             </div>
         );
     }

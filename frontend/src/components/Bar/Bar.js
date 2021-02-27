@@ -4,22 +4,21 @@ import './Bar.css';
 import '../Buttons/Buttons.css';
 import * as FaIcons from "react-icons/fa";
 import Error_displayer from '../../components/error_manager/error_displayer';
-import {update_error, delete_error} from '../../actions/error_management'; 
 
 const SearchBar = (Results, submit_func, search_func, title_creator, descritpion_title) =>{
-    class Head extends Component {
+    class Head extends Error_displayer {
     
-        constructor(props){
-            super(props)
+        constructor(){
+            super()
             this.state={
                 key : "",
                 description : "",
                 title : "",
-                errors: [],
                 isActiveCreator: false,
                 bar_char : '+',
                 result : []
             }
+            this.error_manager = React.createRef();
         }
    
         changeValue = (event) =>{
@@ -27,16 +26,6 @@ const SearchBar = (Results, submit_func, search_func, title_creator, descritpion
                 ...this.state,
                 [event.target.name] : event.target.value
             });
-        }
-    
-        update_bar_error = (response) => {
-            let updated = update_error(response, this.state.errors)
-            this.setState({errors : updated})
-        }
-
-        delete_bar_error = (item) => {
-            let deleted = delete_error(item, this.state.errors)
-            this.setState({errors : deleted})
         }
 
         update_result = (response) => {
@@ -48,7 +37,7 @@ const SearchBar = (Results, submit_func, search_func, title_creator, descritpion
             .then(response => {
                 this.search()
             }).catch(error => {
-                this.update_bar_error(error.request.response)
+                this.error_manager.current.update_error(error.request.response)
             })
         }
 
@@ -71,8 +60,6 @@ const SearchBar = (Results, submit_func, search_func, title_creator, descritpion
             search_func(this.state.key)
             .then(response => {
                 this.update_result(response.data)
-            }).catch(error => {
-                this.update_bar_error(error.request.response)
             })
         }
     
@@ -96,13 +83,13 @@ const SearchBar = (Results, submit_func, search_func, title_creator, descritpion
                         <div className="circle" onClick={this.search}>
                             <p><FaIcons.FaSearch /></p>
                         </div>
-                        <div className="circle" onClick={this.activateCreator}>
-                            <p>{this.state.bar_char}</p>
+                        <div className={submit_func ? "circle" : null} onClick={this.activateCreator}>
+                        {submit_func ? <p>{this.state.bar_char}</p> : null}
                         </div>
                     </div>
                 </div>
                 <div className="pos">
-                    <div className={this.state.isActiveCreator ? "creator creator-display" : "creator creator-hide"} >
+                    <div className={(this.state.isActiveCreator && submit_func) ? "creator creator-display" : "creator creator-hide"} >
                         <input
                             name="title"
                             type="text"
@@ -120,11 +107,10 @@ const SearchBar = (Results, submit_func, search_func, title_creator, descritpion
                             onClick={this.submit}>
                                 submit
                         </Button>
-                        <p>{this.state.error}</p>
                     </div>
                 </div>
                 <Results result={this.state.result} />
-                <Error_displayer  errors={this.state.errors} remove={this.delete_bar_error} /> 
+                <Error_displayer ref={this.error_manager} />
                 </>    
             )
         }

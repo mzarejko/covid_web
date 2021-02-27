@@ -1,27 +1,22 @@
 import React, { Component } from 'react';
 import Button from '../Buttons/Buttons';
-import {assignProducts} from '../../actions/profile';
-import {setProducts} from '../../actions/profile';
-import {listAssignedProducts} from '../../actions/profile';
-import {listUnassignedProducts} from '../../actions/profile';
-import {deleteProducts} from '../../actions/profile';
-import {deleteAnnouncement} from '../../actions/profile';
+import {assignProducts, setProducts, listAssignedProducts, listUnassignedProducts,
+                deleteProducts, deleteAnnouncement} from '../../actions/stuff';
 import './ProductsBox.css';
 import Error_displayer from '../../components/error_manager/error_displayer';
-import {update_error, delete_error} from '../../actions/error_management'; 
 
 class ProductsBox extends Component {
    
     constructor(props){
         super(props)
         this.state={
-            errors: [],
             assigned_products : [],
             unassigned_products : [],
             name : "",
             description : "",
             priority : "",
         }
+        this.error_manager = React.createRef();
     }
 
     deleteAnnouncement = () => {
@@ -29,20 +24,10 @@ class ProductsBox extends Component {
             .then(response => {
                 this.props.exit()
             }).catch(error => {
-                this.update_product_error(error.request.response)
+                this.error_manager.current.update_error(error.request.response)
             })
     }
     
-    update_product_error = (response) => {
-        let updated = update_error(response, this.state.errors)
-        this.setState({errors : updated})
-    }
-
-    delete_product_error = (item) => {
-        let deleted = delete_error(item, this.state.errors)
-        this.setState({errors : deleted})
-    }
-
 
     update_assigned_products = (response) => {
         this.setState({assigned_products : response})
@@ -57,7 +42,7 @@ class ProductsBox extends Component {
         .then((response) => {
             this.update_assigned_products(response.data)
         }).catch((error) => {
-            this.update_product_error(error.request.response)
+            this.error_manager.current.update_error(error.request.response)
         })
     }
 
@@ -66,7 +51,7 @@ class ProductsBox extends Component {
         .then((response) => {
             this.update_unassigned_products(response.data)
         }).catch((error) => {
-            this.update_product_error(error.request.response)
+            this.error_manager.current.update_error(error.request.response)
         })
     }
 
@@ -86,7 +71,7 @@ class ProductsBox extends Component {
             this.listAssigned()
             this.listUnassigned()
         }).catch((error)=> {
-            this.update_product_error(error.request.response)
+            this.error_manager.current.update_error(error.request.response)
         })
     }
     
@@ -104,7 +89,7 @@ class ProductsBox extends Component {
             this.listUnassigned()
             this.listAssigned()
         }).catch(error => {
-            this.update_product_error(error.request.response)
+            this.error_manager.current.update_error(error.request.response)
         })
     }    
 
@@ -113,9 +98,9 @@ class ProductsBox extends Component {
         .then(response => {
             this.listUnassigned()
             this.listAssigned()
-            this.update_product_error(response.request.response)
         }).catch(error => {
-            this.update_product_error(error.request.response)
+            console.log(error.message)
+            this.error_manager.current.update_error(error.request.response)
         })
     }
 
@@ -146,7 +131,6 @@ class ProductsBox extends Component {
                                 max="10" 
                                 value={this.state.priority}
                                 onChange={this.changeValue} />
-                            <p>{this.state.error}</p>
                         </div>
                         <div className='act_btn'>
                             <Button 
@@ -228,7 +212,7 @@ class ProductsBox extends Component {
                 </div>
                 </div>
                 </div>
-                <Error_displayer  errors={this.state.errors} remove={this.delete_product_error} /> 
+                <Error_displayer ref={this.error_manager} />
             </div>
        )
     }

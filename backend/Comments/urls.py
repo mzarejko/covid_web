@@ -2,7 +2,6 @@ from django.urls import path
 from . import views 
 
 urlpatterns = [
-    path('needy/', views.NeedyOpinion.as_view(), name='needy-opinion'),
-    path('volunteer/', views.VolunteerOpinion.as_view(), name='volunteer-opinion'),
-    path('needy/<int:pk>', views.UpdateDestroyOpinion.as_view(), name='detail-opinion'),
+    path('set/', views.CreateOpinion.as_view(), name='set-opinion'),
+    path('<int:pk>', views.ListOpinion.as_view(), name='list-opinion'),
 ]

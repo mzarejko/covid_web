@@ -8,7 +8,7 @@ from rest_framework.exceptions import ValidationError
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username']
+        fields = ['pk', 'username', 'image', 'telephone', 'country', 'town', 'email']
 
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -24,7 +24,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['username', 'email',  'country', 'town', 'telephone', 'password', 'birth', 'firstname', 'lastname', 'description']
+        fields = ['username', 'image', 'email',  'country', 'town', 'telephone', 'password', 'birth', 'firstname', 'lastname', 'description']
         extra_kwargs = {
             'password': {'write_only' : True}
         }
@@ -59,6 +59,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     # extended function for create user
     def create(self, data):
         password = data['password'] 
+        
 
         user = User(
             username=data['username'],
@@ -69,8 +70,10 @@ class RegisterSerializer(serializers.ModelSerializer):
             birth = data['birth'],
             firstname = data['firstname'],
             lastname = data['lastname'],
-            description = data['description']
+            description = data['description'],
         )
+        if data['image']:
+            user.image = data['image']
         user.set_password(password)
         user.save()
         return user

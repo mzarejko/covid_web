@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import './auth_style.css';
 import {register} from '../../actions/auth';
 import {base_paths} from '../../utils/Endpoints'; 
-import {update_error, delete_error} from '../../actions/error_management'; 
 import Error_displayer from '../../components/error_manager/error_displayer';
 
 class Register extends Component {
@@ -11,6 +10,7 @@ class Register extends Component {
         super(props)
         this.state = ({
             username: "",
+            image: null,
             email: "",
             country: "",
             town: "",
@@ -20,8 +20,8 @@ class Register extends Component {
             lastname: "",
             birth: "",
             description: "",
-            errors: [],
         })
+        this.error_manager = React.createRef();
     }
 
     changeValue = (event) => {
@@ -31,19 +31,11 @@ class Register extends Component {
         });
     }
     
-    update_register_error = (response) => {
-        let update = update_error(response, this.state.errors)
-        this.setState({errors : update})
-    }
-
-    delete_register_error = (item) => {
-        let deleted = delete_error(item, this.state.errors)
-        this.setState({errors : deleted})
-    }
 
     handleSubmit = () => {
         register(
             this.state.username,
+            this.state.image,
             this.state.email,
             this.state.country,
             this.state.town,
@@ -53,7 +45,7 @@ class Register extends Component {
             this.state.password,
             this.state.firstname,
             this.state.lastname,
-            this.update_register_error
+            this.error_manager.current.update_error
         )
     }
    
@@ -162,7 +154,7 @@ class Register extends Component {
                        <button onClick={this.handleSubmit}>register</button>
                    </div>
                 </div>
-                <Error_displayer  errors={this.state.errors} remove={this.delete_register_error} /> 
+                <Error_displayer ref={this.error_manager} />
             </div>
         );
     }

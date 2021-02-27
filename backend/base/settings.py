@@ -31,7 +31,7 @@ SECRET_KEY = env('SECRET_KEY', default='foo')
 DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['*'] 
-
+BASE_URL = 'http://0.0.0.0:8000'
 
 # Application definition
 

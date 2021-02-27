@@ -1,3 +1,7 @@
+export const url_listOpinion = (key) => {
+    return 'comments/'+key
+}
+
 
 export const url_deleteAnnouncement = (key)=> {
     return 'announcements/'+key
@@ -20,7 +24,7 @@ export const url_setProducts = (key1) => {
 }
 
 export const url_updateProducts = (key1, key2) => {
-    return 'announcements/'+key1+'/products/'+key2+'/'
+    return 'announcements/'+key1+'/products/'+key2
 }
 
 
@@ -40,6 +44,9 @@ export const base_paths = {
     COVID_DATA : 'covid/data/',
     SET_ANNOUNCEMENT : 'announcements/set/',
     LIST_MY_ANNONCEMENT : 'announcements/my/',
-    LIST_ANNONCEMENT : 'announcements/'
+    LIST_ANNONCEMENT : 'announcements/',
+    LIST_USERS : 'accounts/users/',
+    ADMIN : 'accounts/admin/',
+    COMMENTS : 'comments/set/',
 }
 

@@ -1,11 +1,3 @@
-img {
-    position: fixed;
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-}
-
 
 .MainLogo {
     box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.6);
@@ -15,10 +7,11 @@ img {
     flex-direction: column;
     align-items: center;
     object-fit: contain;
+    z-index: 998;
 }
 
 .ctg {
-    margin-top: 32px;
+    margin-top: 42px;
 }
 
 .MainLogo > h1 {
@@ -31,7 +24,6 @@ img {
     margin-top: 8px;
     color: #fff;
     font-size: 32px;
-    font-family: 'Trebuchet MS', 'Lucida Sans', Arial, sans-serif;
 }
 
 

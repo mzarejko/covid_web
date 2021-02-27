@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import './cards.css'
 import ProductsBox from './ProductsBox'; 
 import SearchBar from '../Bar/Bar';  
-import {setAnnouncement} from '../../actions/profile';
-import {listAnnoncement} from '../../actions/profile';
+import {setAnnouncement, listAnnoncement} from '../../actions/stuff';
 
 class Cards extends Component {
 

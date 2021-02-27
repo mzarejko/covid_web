@@ -16,7 +16,7 @@
     width: 900px;
     height: 700px;
     background-color: rgb(30, 33, 36);
-    overflow-y: scroll;
+    overflow-y: auto;
     flex-direction: column;
 }
 

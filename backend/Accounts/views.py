@@ -1,7 +1,7 @@
 from .models import User  
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import RegisterSerializer, LoginSerializer
+from .serializers import UserSerializer, RegisterSerializer, LoginSerializer
 from django.http import Http404 
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework import status 
@@ -13,6 +13,25 @@ import jwt
 from django.conf import settings
 from Members.models import Volunteer, Needy
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.generics import ListAPIView
+from .filter_class import UserFilter
+
+class GetUsers(ListAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class =  UserSerializer
+    filterset_class = UserFilter 
+
+    def get_queryset(self):
+        users = User.objects.all()
+        return users
+
+class GetAdmin(ListAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = UserSerializer
+
+    def get_queryset(self):
+        user = User.objects.filter(pk=1)
+        return user
 
 class LoginAPI(APIView):
     permission_classes = [AllowAny]

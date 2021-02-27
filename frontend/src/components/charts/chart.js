@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import './chart.css';
 import {getData} from '../../actions/covid';
 import { Line } from 'react-chartjs-2';
-import Error_displayer from '../../components/error_manager/error_displayer';
-import {update_error, delete_error} from '../../actions/error_management'; 
 
 
 
@@ -20,19 +18,9 @@ class Charts extends Component {
             deaths_total : null,
             deaths_x : null,
             deaths_y : null,
-            errors : []
         }
     }
     
-    update_chart_error = (response) => {
-        let updated = update_error(response, this.state.errors)
-        this.setState({errors : updated})
-    }
-
-    delete_chart_error = (item) => {
-        let deleted = delete_error(item, this.state.errors)
-        this.setState({errors : deleted})
-    }
 
     componentDidMount(){
         getData()
@@ -47,7 +35,7 @@ class Charts extends Component {
                     deaths_y : response.data[0].deaths_y
                 })
             })
-        .catch((error) => {this.update_chart_error(error.request.response)})
+        .catch((error) => {console.log(error)})
     }
 
    
@@ -129,7 +117,6 @@ class Charts extends Component {
                         }}/>
                 </div>
             </div>
-                <Error_displayer  errors={this.state.errors} remove={this.delete_chart_error} /> 
             </>
         )
     }

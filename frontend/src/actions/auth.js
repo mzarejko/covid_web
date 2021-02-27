@@ -30,10 +30,11 @@ export const login = (username, password, error_func) => {
     }
 
 
-export const register = (username, email, country, town, telephone, 
+export const register = (username, image,  email, country, town, telephone, 
                             birth, description, password, firstname, lastname, error_func) => {
         axios.post(base_paths.REGISTER, {
             "username": username,
+            "image": image,
             "email": email,
             "country": country,
             "town": town,

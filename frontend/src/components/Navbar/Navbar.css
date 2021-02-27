@@ -39,7 +39,7 @@
 
 .nav-active {
     background-color: #181818;
-    width: 80px;
+    width: 60px;
     height: 100vh;
     dispaly: flex;
     justify-content: center;
@@ -67,7 +67,7 @@
     height: 100%;
     dispaly: flex;
     align-items: center;
-    padding: 0px 20px;
+    padding: 0px 10px;
 }
 
 .border {

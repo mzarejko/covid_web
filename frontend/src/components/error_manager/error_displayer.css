@@ -32,7 +32,7 @@
 }
 
 #show-hide {
-    animation:  up-bottom 4s ease-out;
+    animation:  up-bottom 6s ease-out;
 }
 
 
@@ -42,7 +42,7 @@
         opacity: 0;
     }
 
-    20% {
+    15% {
         bottom: 10px;
         opacity: 1;
     }

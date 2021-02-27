@@ -4,7 +4,6 @@ from rest_framework.generics import ListAPIView, CreateAPIView, DestroyAPIView, 
 from rest_framework.views import APIView 
 from rest_framework.permissions import IsAuthenticated 
 from Members.permissions import IsNeedyActive, IsVolunteerActive, IsNeedyOwner 
-from .permissions import IsProductNotAssigned
 from Members.models import Needy, Volunteer
 from django.http import Http404
 from rest_framework.response import Response
@@ -78,10 +77,13 @@ class SetProduct(CreateAPIView):
 
     def perform_create(self, serializer):
         announcement = Announcement.objects.get(pk = self.kwargs["pk"])
+        needy = Needy.objects.get(user=self.request.user)
+        if announcement.needy != needy:
+            raise ValidationError({"detail" : "you are not owner of announcement"})
         return serializer.save(announcement = announcement)
 
 class DeleteProduct(APIView):
-    permission_classes = [IsAuthenticated, IsNeedyActive, IsNeedyOwner, IsProductNotAssigned]
+    permission_classes = [IsAuthenticated, IsNeedyActive]
    
     def get_object(self, pk, product_pk):
         try:
@@ -98,12 +100,16 @@ class DeleteProduct(APIView):
 
     def delete(self, request, pk, product_pk):
         product = self.get_object(pk, product_pk)
+        announcement = Announcement.objects.get(pk = pk)
+        needy = Needy.objects.get(user=request.user)
+        if announcement.needy != needy:
+            raise ValidationError({"detail" : "you are not owner of announcement"})
         product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 # assign product to volunteer
 class AssignProduct(APIView):
-    permission_classes = [IsAuthenticated, IsVolunteerActive, IsProductNotAssigned]
+    permission_classes = [IsAuthenticated, IsVolunteerActive]
 
     def put(self, request, pk, product_pk):
         product = Product.objects.get(pk=product_pk)
@@ -111,6 +117,8 @@ class AssignProduct(APIView):
         volunteer = Volunteer.objects.get(user=request.user) 
         username = User.objects.get(volunteer=volunteer).username
         if product.announcement == announcement:
+            if product.volunteer != None:
+                raise ValidationError({'detail':'Product already assigned'})
             product.username = username 
             product.volunteer = volunteer
             product.save()

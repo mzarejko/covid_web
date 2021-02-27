@@ -1,5 +1,5 @@
 .cards {
-    min-height: 83vh;
+    min-height: 85vh;
     width: 100%;
     display: grid;
     grid-template-columns: auto auto auto auto;

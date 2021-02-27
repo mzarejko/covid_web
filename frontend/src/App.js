@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import './App.css';
 import {Router, Switch, Route} from 'react-router-dom';
 import Login from './pages/Authentication/Login';
 import Register from './pages/Authentication/Register';
@@ -9,6 +8,7 @@ import Profile from './pages/profile/profile';
 import {history} from './utils/history';
 import PrivateRoute from './components/Routes/PrivateRoute';
 import {urls} from './utils/urls';
+import './App.css';
 
 class App extends Component {
     render(){
