@@ -82,8 +82,8 @@ After few minutes site should work at address http://0.0.0.0:3000/ with backend 
   - [x]  diplaying chart and data of covid in frontend
   - [x]  possibility to choose a volunteer and a sick person 
   - [x]  exceptions management
-  - [ ]  frontend (all)
-  - [ ]  backend (all)
+  - [x]  frontend (all)
+  - [x]  backend (all)
   - [ ]  production on the herok cloud
   - [x]  announcements management
   - [ ]  changing password/forget password
