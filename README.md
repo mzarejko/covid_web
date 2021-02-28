@@ -77,7 +77,7 @@ After few minutes site should work at address http://0.0.0.0:3000/ with backend 
 
   - [x]  registration
   - [x]  login
-  - [x]  token JWT management 
+  - [x]  token JWT management (sliding session technique)
   - [x]  downloading covid data form github each day
   - [x]  diplaying chart and data of covid in frontend
   - [x]  possibility to choose a volunteer and a sick person 
