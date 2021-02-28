@@ -3,9 +3,6 @@ import './chart.css';
 import {getData} from '../../actions/covid';
 import { Line } from 'react-chartjs-2';
 
-
-
-
 class Charts extends Component {
 
     constructor(props){
@@ -20,7 +17,6 @@ class Charts extends Component {
             deaths_y : null,
         }
     }
-    
 
     componentDidMount(){
         getData()

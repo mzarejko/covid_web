@@ -16,7 +16,6 @@ class RegisterSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(required=True, allow_null=False)
     password = serializers.CharField(required=True, write_only=True,
                                      style = {'input_type': 'password'})
-    telephone = serializers.CharField(required=True,allow_null=False)
     birth = serializers.DateField(required=False, allow_null=True)
     firstname = serializers.CharField(required=False, allow_null=True)
     lastname = serializers.CharField(required=False, allow_null=True)
@@ -43,18 +42,6 @@ class RegisterSerializer(serializers.ModelSerializer):
                                               code=status.HTTP_409_CONFLICT)
         return value
         
-    def validate_telephone(self, value):
-        if User.objects.filter(telephone=value, is_verified=True).exists():
-            raise ValidationError({"error": "User with that telephone number already exist"}, 
-                                              _code=status.HTTP_409_CONFLICT)
-        
-        if len(value) != 9:
-            raise ValidationError({"error": "telephone field need 9 numbers"},
-                                              code= status.HTTP_406_NOT_ACCEPTABLE)
-        return value 
-        
-
-
 
     # extended function for create user
     def create(self, data):

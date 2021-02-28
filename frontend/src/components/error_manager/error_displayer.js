@@ -12,10 +12,11 @@ class Error_displayer extends Component {
 
     // transform if json is string and update 
     transform = (response) => {
+        console.log(response)
         if(typeof(response) ==='string'){
             const json = JSON.parse(response)
+            console.log('json: '+json)
             response = json
-            console.log(response)
         }
         const keys = Object.keys(response)
         console.log(keys)

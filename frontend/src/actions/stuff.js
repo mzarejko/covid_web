@@ -7,6 +7,12 @@ import {url_setProducts} from '../utils/Endpoints';
 import {url_updateProducts} from '../utils/Endpoints';
 import {url_deleteAnnouncement} from '../utils/Endpoints';
 
+export const listMyAnnouncement = () => {
+    return axiosInstance.get(base_paths.LIST_MY_ANNOUNCEMENT)
+}
+
+
+
 export const setAnnouncement = (description, address) => {
     return axiosInstance.post(base_paths.SET_ANNOUNCEMENT, {
         "description" : description,

@@ -3,10 +3,11 @@ import Button from '../Buttons/Buttons';
 import './Bar.css';
 import '../Buttons/Buttons.css';
 import * as FaIcons from "react-icons/fa";
+import * as BiIcons from "react-icons/bi";
 import Error_displayer from '../../components/error_manager/error_displayer';
 
-const SearchBar = (Results, submit_func, search_func, title_creator, descritpion_title) =>{
-    class Head extends Error_displayer {
+const SearchBar = (Results, submit_func, search_func, search_my, title_creator, descritpion_title) =>{
+    class Head extends Component {
     
         constructor(){
             super()
@@ -67,6 +68,46 @@ const SearchBar = (Results, submit_func, search_func, title_creator, descritpion
             this.search()
         }
 
+        
+        search_my_announcements= () => {
+            search_my()
+            .then(response=>{
+                this.update_result(response.data)
+            })
+        }
+
+
+        render_loupe = () => {
+            if (search_func){
+                return (
+                    <div className="circle" onClick={this.search}>
+                        <p><FaIcons.FaSearch /></p>
+                    </div>
+                )
+            }
+        }
+
+        render_submit = () => {
+            if (submit_func){
+                return(
+                    <div className="circle" onClick={this.activateCreator}>
+                        <p>{this.state.bar_char}</p>
+                    </div>
+                )
+            }
+        }
+
+
+        render_mysubmit = () => {
+            if (search_my){
+                return(
+                    <div className="circle" onClick={this.search_my_announcements}>
+                        <p><BiIcons.BiUserCircle /></p>
+                    </div>
+                )
+            }
+        }
+
         render() {
             return (
                 <>
@@ -80,12 +121,9 @@ const SearchBar = (Results, submit_func, search_func, title_creator, descritpion
                                 placeholder="search" 
                                 onChange={this.changeValue} />
                         </div>
-                        <div className="circle" onClick={this.search}>
-                            <p><FaIcons.FaSearch /></p>
-                        </div>
-                        <div className={submit_func ? "circle" : null} onClick={this.activateCreator}>
-                        {submit_func ? <p>{this.state.bar_char}</p> : null}
-                        </div>
+                        {this.render_loupe()}
+                        {this.render_submit()}
+                        {this.render_mysubmit()}
                     </div>
                 </div>
                 <div className="pos">

@@ -15,7 +15,7 @@
     margin: 180px auto;
     width: 900px;
     height: 700px;
-    background-color: rgb(30, 33, 36);
+    background-color: rgb(25, 28, 29);
     overflow-y: auto;
     flex-direction: column;
 }
@@ -39,7 +39,7 @@
 
 .inputs > input {
     margin: 5px;
-    background-color: rgb(30, 33, 36);
+    background-color: rgb(25, 28, 29);
     color: #fff;
     border-top-style: hidden;
     border-right-style: hidden;

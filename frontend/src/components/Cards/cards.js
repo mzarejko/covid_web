@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './cards.css'
 import ProductsBox from './ProductsBox'; 
 import SearchBar from '../Bar/Bar';  
-import {setAnnouncement, listAnnoncement} from '../../actions/stuff';
+import {setAnnouncement, listAnnoncement, listMyAnnouncement} from '../../actions/stuff';
 
 class Cards extends Component {
 
@@ -55,5 +55,6 @@ class Cards extends Component {
 export default SearchBar(Cards, 
                         setAnnouncement, 
                         listAnnoncement,
+                        listMyAnnouncement,                
                         "address",
                         "description");

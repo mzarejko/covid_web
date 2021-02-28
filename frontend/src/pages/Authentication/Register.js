@@ -3,6 +3,7 @@ import './auth_style.css';
 import {register} from '../../actions/auth';
 import {base_paths} from '../../utils/Endpoints'; 
 import Error_displayer from '../../components/error_manager/error_displayer';
+import ImageUploader from '../../components/ImageUploader/ImagrUploader';
 
 class Register extends Component {
     
@@ -20,6 +21,7 @@ class Register extends Component {
             lastname: "",
             birth: "",
             description: "",
+            progress: 0
         })
         this.error_manager = React.createRef();
     }
@@ -30,8 +32,13 @@ class Register extends Component {
             [event.target.name]: event.target.value
         });
     }
+   
+    update_image = (image) => {
+        this.setState({
+            image : image
+        })
+    }
     
-
     handleSubmit = () => {
         register(
             this.state.username,
@@ -48,6 +55,8 @@ class Register extends Component {
             this.error_manager.current.update_error
         )
     }
+
+
    
     render(){
         return (
@@ -150,6 +159,7 @@ class Register extends Component {
                            onChange={this.changeValue}
                        /> 
                    </label>
+                   <ImageUploader update_image={this.update_image} />
                    <div className='items'>
                        <button onClick={this.handleSubmit}>register</button>
                    </div>

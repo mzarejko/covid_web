@@ -57,5 +57,6 @@ class Users extends Component {
 export default SearchBar(Users, 
                         null, 
                         listUsers,
+                        null,
                         "title",
                         "comment");

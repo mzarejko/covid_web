@@ -14,8 +14,6 @@ class MainLogo extends Component {
         this.error_manager = React.createRef();
     }
 
-
-
     set_needy = () =>{
         setNeedy(this.error_manager.current.update_error)
     }

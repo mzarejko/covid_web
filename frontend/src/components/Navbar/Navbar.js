@@ -22,7 +22,6 @@ class Navbar extends Component {
             active_bar: !this.state.active_bar
         })
     }
-    
 
     render() {
         return (

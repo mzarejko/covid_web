@@ -1,5 +1,6 @@
 .comment-box {
     overflow-y: auto;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     width: 100%;

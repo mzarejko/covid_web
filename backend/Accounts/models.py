@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.tokens import OutstandingToken
+from django.core.validators import MinLengthValidator
+
 
 # this is needed because we extend AbstractBaseUser  
 class CustomAccountManager(BaseUserManager):
@@ -39,7 +41,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     birth = models.DateField(null=True, blank=True)
     country = models.CharField(max_length=45)
     town = models.CharField(max_length=45)
-    telephone = models.CharField(unique=True, max_length=9, null=True)
+    telephone = models.CharField(unique=True, max_length=9, validators=[MinLengthValidator(9)], null=True)
     description = models.CharField(max_length=400, null=True)
     image = models.ImageField(null=True, default='profile.png')
     firstname = models.CharField(max_length=45, null=True)
