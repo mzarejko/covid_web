@@ -1,6 +1,5 @@
 Django>=3.0,<4.0
 numpy 
-tensorflow==2.2
 djangorestframework
 markdown
 django-filter
@@ -10,7 +9,6 @@ python-environ
 django-cors-headers
 django-rest-auth
 djangorestframework-simplejwt
-django-phonenumber-field[phonenumbers]
 pandas
 celery
 django_celery_results
