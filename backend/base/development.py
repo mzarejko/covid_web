@@ -97,4 +97,3 @@ INSTALLED_APPS += [
 MIDDLEWARE += ['whitenoise.middleware.WhiteNoiseMiddleware',]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
-django_heroku.settings(locals())
