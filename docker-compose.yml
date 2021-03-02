@@ -7,17 +7,17 @@ services:
         container_name: db
         restart: always
         env_file:
-            - ./backend/.env
+            - ./backend/base/.env
         ports:
             - "5432:5432"
     backend:
         build: ./backend 
         container_name: backend
         restart: on-failure
+        env_file:
+            - ./backend/base/.env
         volumes:
             - ./backend:/app/backend
-        env_file:
-            - ./backend/.env
         command:  bash -c "./wait-for.sh db:5432 -- python3 manage.py migrate && 
                            python3 manage.py runserver 0.0.0.0:8000"
         ports:
@@ -31,18 +31,18 @@ services:
         image: rabbitmq
         container_name: rabbitmq
         hostname: rabbitmq
-        env_file:
-            - ./backend/.env
         ports:
             - "5672:5672"
             - "15672:15672"
         volumes:
             - ./backend:/app/backend
+        env_file:
+            - ./backend/base/.env 
         restart: on-failure 
     celery:
         build: ./backend
         container_name: celery
-        command: bash -c "./wait-for.sh rabbitmq:5672 -- celery -A base worker -l INFO --uid=nobody --gid=nogroup"
+        command: bash -c "./wait-for.sh rabbitmq:5672 -- celery -A base worker -l INFO"
         volumes:
             - ./backend:/app/backend
         depends_on:
@@ -52,7 +52,7 @@ services:
     celery-beat:
         build: ./backend 
         container_name: beat
-        command: bash -c "./wait-for.sh rabbitmq:5672 -- celery -A base beat -l INFO --uid=nobody --gid=nogroup"
+        command: bash -c "./wait-for.sh rabbitmq:5672 -- celery -A base beat -l INFO"
         volumes:
             - ./backend:/app/backend
         depends_on:

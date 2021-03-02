@@ -82,10 +82,9 @@ class RegisterAPI(APIView):
             # info for user
             email_body = f'Hi {user.username} click this link to activate account:  \n {absurl}'
             mail = {'email_body': email_body,  'to_email': user.email, 'email_subject': 'Verify your email'}
-
+            
             # send email to verify account
             send_emali.delay(mail)
-
             return Response({"message":"Check your mail for activation mail"}, status=status.HTTP_201_CREATED)
 
 class VerifyEmail(APIView):

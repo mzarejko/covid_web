@@ -30,7 +30,7 @@ class RegisterSerializer(serializers.ModelSerializer):
     
 
     def validate_username(self, value):
-        if User.objects.filter(username=value, is_verified=True).exists():
+        if User.objects.filter(username=value).exists():
             raise ValidationError({"error": "Username already exist"}, 
                                               code=status.HTTP_409_CONFLICT)
         
