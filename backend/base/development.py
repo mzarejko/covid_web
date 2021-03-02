@@ -2,18 +2,19 @@ from .base import *
 from celery.schedules import crontab
 import os 
 from datetime import timedelta
+import django_heroku
 
-SECRET_KEY= config('SECRET_KEY') 
+SECRET_KEY= os.environ.get('SECRET_KEY') 
 
 # if production change to False
 DEBUG = False 
 
 
-POSTGRES_HOST=config('POSTGRES_HOST')
-PORT=config('PORT')
-POSTGRES_DB=config('POSTGRES_DB')
-POSTGRES_USER= config('POSTGRES_USER')
-POSTGRES_PASSWORD= config('POSTGRES_PASSWORD')
+POSTGRES_HOST=os.environ.get('POSTGRES_HOST')
+PORT=os.environ.get('PORT')
+POSTGRES_DB=os.environ.get('POSTGRES_DB')
+POSTGRES_USER= os.environ.get('POSTGRES_USER')
+POSTGRES_PASSWORD= os.environ.get('POSTGRES_PASSWORD')
  
 DATABASES = {
     "default": {
@@ -26,15 +27,15 @@ DATABASES = {
     }
 }
 
-RABBITMQ_DEFAULT_USER= config('RABBITMQ_DEFAULT_USER')
-RABBITMQ_DEFAULT_PASS= config('RABBITMQ_DEFAULT_PASS')
+RABBITMQ_DEFAULT_USER= os.environ.get('RABBITMQ_DEFAULT_USER')
+RABBITMQ_DEFAULT_PASS= os.environ.get('RABBITMQ_DEFAULT_PASS')
 
  
 # if production change!
 ALLOWED_HOSTS = ['*'] 
 BASE_URL = 'http://0.0.0.0:8000'
 
-CELERY_BROKER_URL=config('CELERY_BROKER_URL')
+CELERY_BROKER_URL=os.environ.get('CELERY_BROKER_URL')
 CELERY_RESULT_BACKEND='django-db'
 
 CELERY_BROKER_URL = CELERY_BROKER_URL
@@ -52,8 +53,8 @@ CELERY_BEAT_SCHEDULE = {
 }
 
 
-EMAIL_HOST_USER=config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD=config('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER=os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD=os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS=True
 EMAIL_HOST='smtp.gmail.com'
 EMAIL_PORT=587
@@ -95,3 +96,5 @@ INSTALLED_APPS += [
 ]
 MIDDLEWARE += ['whitenoise.middleware.WhiteNoiseMiddleware',]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
+django_heroku.settings(locals())

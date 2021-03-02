@@ -14,8 +14,6 @@ services:
         build: ./backend 
         container_name: backend
         restart: on-failure
-        env_file:
-            - ./backend/base/.env
         volumes:
             - ./backend:/app/backend
         command:  bash -c "./wait-for.sh db:5432 -- python3 manage.py migrate && 

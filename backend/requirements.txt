@@ -17,3 +17,4 @@ django-filter
 pillow
 python-decouple
 whitenoise==5.2
+django-heroku
