@@ -1,18 +1,10 @@
-setup:
-    addons:
-        - plan: heroku-postgresql
-          as: db
-        - plan: cloudamqp
-          as: rabbitmq
 build:
     docker:
-        web: ./backend/Dockerfile
-        worker: ./backend/Dockerfile
-    config:
-        NODE_ENV: ./backend/production
+        web: Dockerfile
+        worker: Dockerfile
 run:
-    web: python3 manage.py runserver 0.0.0.0:8000
-    worker: celery -A my_proj worker -l INFO --beat -l INFO --scheduler --scheduler django --loglevel=info
+    web: python3 manage.py makemigrations --no-input && python3 manage.py migrate --no-input && python3 manage.py runserver 0.0.0.0:$PORT
+    worker: celery -A base worker -l INFO --beat -l INFO 
 release:
   image: web
   command:

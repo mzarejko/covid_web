@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import Opinion 
 from Accounts.models import User 
-from base.development import BASE_URL
+import os 
 
 class UserInfoSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField()
@@ -11,7 +11,7 @@ class UserInfoSerializer(serializers.ModelSerializer):
         fields = ['username', 'image']
 
     def get_image(self, user):
-        return BASE_URL+user.image.url
+        return user.image.url
          
 
 class OpinionSerializer(serializers.ModelSerializer):

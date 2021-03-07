@@ -32,24 +32,32 @@ export const login = (username, password, error_func) => {
 
 export const register = (username, image,  email, country, town, telephone, 
                             birth, description, password, firstname, lastname, error_func) => {
-        axios.post(base_paths.REGISTER, {
-            "username": username,
-            "image": image,
-            "email": email,
-            "country": country,
-            "town": town,
-            "telephone": telephone,
-            "birth": birth,
-            "description": description,
-            "password": password,
-            "firstname": firstname,
-            "lastname": lastname 
-        }).then((resp) => {
+        const formData = new FormData()
+        formData.append("username", username)
+        if (image){
+            formData.append("image",image)
+        }
+        formData.append("email", email)
+        formData.append("country", country)
+        formData.append("town", town)
+        formData.append("telephone", telephone)
+        formData.append("birth", birth)
+        formData.append("description", description)
+        formData.append("password", password)
+        formData.append("firstname", firstname)
+        formData.append("lastname", lastname)
+        axios.post(base_paths.REGISTER,
+            formData, 
+            { headers: { "content-type": "multipart/form-data" } }
+        ).then((resp) => {
+            console.log(resp.request)
             error_func(resp.request.response)    
         }).catch((error) =>{
+            console.log(error.request)
             error_func(error.request.response)    
         });
     }
+
 
 
 
