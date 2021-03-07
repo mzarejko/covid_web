@@ -12,13 +12,10 @@ DATABASES = {}
 DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
  
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS') 
+ALLOWED_HOSTS = ['https://covidwebbackend.herokuapp.com', '127.0.0.1'] 
 
 CELERY_BROKER_URL=os.environ.get('CLOUDAMQP_URL')
 CELERY_RESULT_BACKEND='django-db'
-
-CELERY_BROKER_URL = CELERY_BROKER_URL
-CELERY_RESULT_BACKEND =CELERY_RESULT_BACKEND 
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TAST_SERIALIZER = 'json'
 CELERY_ENABLE_UTC = True
