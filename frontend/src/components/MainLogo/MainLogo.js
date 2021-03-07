@@ -25,7 +25,7 @@ class MainLogo extends Component {
     render() {
         return (
             <div className='MainLogo'>
-                <h1>WHO YOU ARE?</h1>
+                <h1>WHO ARE YOU?</h1>
                 <p>select a class</p>
                 <div className="ctg">
                     <Button 
