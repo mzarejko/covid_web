@@ -5,7 +5,7 @@
   - Program is website for easy communication between people in quarantine who need store products and people willing to help them.
   - showing the current status of covid cases in Poland 
  
-- ![#1589F0](https://via.placeholder.com/15/1589F0/000000?text=+) `#1589F0`
+- ![#1589F0](https://via.placeholder.com/15/1589F0/000000?text=+) efefe `#1589F0`
 
 ## Content
 
