@@ -16,11 +16,6 @@ RUN pip install -r requirements.txt
 RUN apt-get update && apt-get install net-tools 
 RUN apt-get install -y netcat
 
-# wait tool for scheduling containers
-COPY wait-for.sh wait-for.sh
-RUN chmod +x wait-for.sh
-
-
 COPY . /app/backend/
 
 ENV DJANGO_SETTINGS_MODULE=base.development 
