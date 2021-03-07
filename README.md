@@ -91,6 +91,8 @@ If something went wrong most likely there are conflicting files in the folder th
   - [x]  production on the herok cloud
   - [x]  announcements management
   - [ ]  changing password/forget password
+
+This project is still in development
  
  ## Current page layout  <a name="layout"></a>
  ### home/
