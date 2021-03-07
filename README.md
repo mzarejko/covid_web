@@ -2,12 +2,10 @@
 
 ## Goal
 
-  - Program is website for easy communication between people in quarantine who need store products and people willing to help them.
+  - Program is website for easy communication between people in quarantine who need store products and people   willing to help them.
   - showing the current status of covid cases in Poland 
  
-<div class="text-red bg-red-light mb-2">
-  .text-red on .bg-red-light
-</div>
+Website work on url https://covidwebfrontend.herokuapp.com/, production code for heroku is on [production]((../production?raw=true))
 
 ## Content
 
