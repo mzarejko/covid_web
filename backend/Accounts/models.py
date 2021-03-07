@@ -43,7 +43,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     town = models.CharField(max_length=45)
     telephone = models.CharField(unique=True, max_length=9, validators=[MinLengthValidator(9)], null=True)
     description = models.CharField(max_length=400, null=True)
-    image = models.ImageField(upload_to='static/media/', default='/static/media/profile.png')
+    image = models.ImageField(default='profile.png')
     firstname = models.CharField(max_length=45, null=True)
     lastname = models.CharField(max_length=45, null=True)
     is_active = models.BooleanField(default=True)
