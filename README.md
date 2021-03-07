@@ -5,9 +5,8 @@
   - Program is website for easy communication between people in quarantine who need store products and people willing to help them.
   - showing the current status of covid cases in Poland 
  
- ```diff
- website work on https://covidwebfrontend.herokuapp.com, production code on
-``` 
+- ![#1589F0](https://via.placeholder.com/15/1589F0/000000?text=+) `#1589F0`
+
 ## Content
 
 1. [General Info](#info)
