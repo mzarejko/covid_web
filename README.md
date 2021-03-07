@@ -15,7 +15,7 @@
 
 ## General info <a name="info"></a>
 
-As user you can choose to be volunteer or needy, depending on the selected category, you have specific functions. Volunteer can create announcements and add products that he needs. Needy can assign to product which he want to buy for sick person. Additionally website show total amount of confirmed cases of covid and deaths on chart. Data is downloaded and updated every day at midnight from the site https://github.com/CSSEGISandData/COVID-19.
+Main branch have development code (production in branch -> production), it will only run locally, with a clean database and without superuser. Main functionalities of website is the possibility to select a volunteer or needy, depending on the selected category, you have specific functions. Volunteer can create announcements and add products that he needs. Needy can assign to product which he want to buy for person in quarantine. Additionally website show total amount of confirmed cases of covid and deaths on chart. Data is downloaded and updated every day at midnight from the site https://github.com/CSSEGISandData/COVID-19.
 
 ## Technologies <a name="technologies"></a>
 
@@ -31,7 +31,7 @@ As user you can choose to be volunteer or needy, depending on the selected categ
   celery-beat                             |        axios                        
   Django 4.0                              |         react-chartjs-2                        
   python 3.8                     |          react-router-dom                                                                                     
-  djangorestframework                                                   
+  djangorestframework 3.12                                                   
       
 
 
@@ -43,10 +43,9 @@ As user you can choose to be volunteer or needy, depending on the selected categ
 
 ## Setup
 
-To make site working install [docker-engine](https://docs.docker.com/engine/install/)  and docker-compose (dockerfiles in repo are for linux), next you have to create in backend folder file with name .env where will be all private settigns. Example of file is shown below:
+To make site working install [docker-engine](https://docs.docker.com/engine/install/)  and docker-compose (dockerfiles in repo are for linux), next you have to create in /backend/base/ folder file with name .env where will be all private settigns. Example of file is shown below:
 
      SECRET_KEY= 'random string of characters',
-     DEBUG = 'True or False',
      
      POSTGRES_HOST = 'name of database host',
      PORT = 'port of database',
@@ -59,14 +58,17 @@ To make site working install [docker-engine](https://docs.docker.com/engine/inst
      CELERY_BROKER_URL = 'pyamqp://[$RABBITMQ_DEFAULT_USER]:[$RABBITMQ_DEFAULT_PASS]@rabbitmq:5672//',
      CELERY_RESULT_BACKEND = 'django-db',
      
-     GMAIL = 'mail which will send account activation mail to user',
-     PASS_GMAIL = 'password to mail'
+     EMAIL_HOST_USER = 'mail which will send account activation mail to user',
+     EMAIL_HOST_PASSWORD = 'password to mail'
      
 Next type in terminal this command to start site
 
      $ sudo docker-compose up --build
      
 After few minutes site should work at address http://0.0.0.0:3000/ with backend at http://0.0.0.0:8000/
+
+
+If something went wrong most likely there are conflicting files in the folder that need to be deleted, such as a .pid file/
 
 
   
@@ -84,7 +86,7 @@ After few minutes site should work at address http://0.0.0.0:3000/ with backend 
   - [x]  exceptions management
   - [x]  frontend (all)
   - [x]  backend (all)
-  - [ ]  production on the herok cloud
+  - [x]  production on the herok cloud
   - [x]  announcements management
   - [ ]  changing password/forget password
  
