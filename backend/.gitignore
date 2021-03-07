@@ -1,0 +1,8 @@
+
+# ignor dirs
+__pycache__/
+
+# ignore env
+.env
+
+celerybeat-schedule

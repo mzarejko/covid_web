@@ -1,0 +1,10 @@
+.Uploader {
+    padding: 10px;
+    position: relative;
+    left: 10%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+

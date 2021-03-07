@@ -1,0 +1,15 @@
+Django>=3.0,<4.0
+python-decouple
+psycopg2-binary
+numpy==1.20
+djangorestframework==3.12.2
+markdown
+django-filter==2.4.0
+django-cors-headers==3.7.0
+django-rest-auth==0.9.5
+djangorestframework-simplejwt
+pandas==1.2.3
+celery==4.2
+django_celery_results
+django_celery_beat
+pillow==8.1.2
