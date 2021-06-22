@@ -95,10 +95,7 @@ If something went wrong most likely there are conflicting files in the folder th
 This project is still in development
  
  ## Current page layout  <a name="layout"></a>
- ### menu/
-![alt text](../doc_images/menu.png?raw=true)
- ### home/
-![alt text](../doc_images/home.png?raw=true)
- ### game/
-![alt text](../doc_images/game.png?raw=true)
+![alt text](../menu/1.png?raw=true)
+![alt text](../menu/2.png?raw=true)
+![alt text](../menu/3.png?raw=true)
 
