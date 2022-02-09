@@ -95,7 +95,7 @@ If something went wrong most likely there are conflicting files in the folder th
 This project is still in development
  
  ## Current page layout  <a name="layout"></a>
-![alt text](../menu/1.png?raw=true)
-![alt text](../menu/2.png?raw=true)
-![alt text](../menu/3.png?raw=true)
+![alt text](../1.png?raw=true)
+![alt text](../2.png?raw=true)
+![alt text](../3.png?raw=true)
 
