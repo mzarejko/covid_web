@@ -5,7 +5,7 @@
   - Program is website for easy communication between people in quarantine who need store products and people   willing to help them.
   - showing the current status of covid cases in Poland 
  
-Website work on url https://covidwebfrontend.herokuapp.com/, production code for heroku is on [production](https://github.com/mzarejko/covid_web/tree/production). Website can be test without registration (you can use a test account login: test, password: test)
+Website work on url https://covidwebfrontend.herokuapp.com/, production code for heroku is on [production](https://github.com/mzarejko/covid_web/tree/production) (right now dyno is turn off because of cost risk). Website can be test without registration (you can use a test account login: test, password: test)
 
 ## Content
 
