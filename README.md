@@ -96,6 +96,6 @@ This project is still in development
  
  ## Current page layout  <a name="layout"></a>
 ![alt text](./1.png?raw=true)
-![alt text](./2.png?raw=true)
 ![alt text](./3.png?raw=true)
+![alt text](./4.png?raw=true)
 
